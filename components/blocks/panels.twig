@@ -1,0 +1,129 @@
+{% set boxed = fields.boxed %}
+{% set box_background = fields.box_background|default('#14203e') %}
+{% set box_text = fields.box_text|default(getContrastColor(box_background)) %}
+{% set cta = fields.cta %}
+{% set images = fields.images %}
+{% set reversed = fields.reversed %}
+{% set subtitle = fields.subtitle %}
+{% set text = fields.text %}
+{% set title = fields.title %}
+
+{% set cropWidth = 1300 %}
+{% set cropHeight = 1100 %}
+
+{% set count = images|length %}
+{% set single = count == 1 %}
+
+{% if single %}
+  {% set cropWidth = 1806 %}
+  {% set cropHeight = 1000 %}
+{% endif %}
+
+
+{% if boxed %}
+  {% set className = className ~ ' panels--boxed' %}
+{% endif %}
+
+{% if single %}
+  {% set className = className ~ ' panels--single' %}
+{% endif %}
+
+{% if reversed %}
+  {% set className = className ~ ' panels--reversed' %}
+{% endif %}
+
+{% if not single and not boxed %}
+  {% set className = className ~ ' panels--standard' %}
+{% endif %}
+
+{% set headingClasslist = 'panels__heading' %}
+{% if boxed %}
+  {% set headingClasslist = headingClasslist ~ ' panels__heading--boxed' %}
+{% endif %}
+
+<section id="{{ id }}"
+class="{{ className }}"
+style="--background: {{ box_background }}; --text: {{ box_text }};">
+<div class="container">
+<div class="row">
+<div class="col">
+<div class="panels__contents">
+  {% if boxed and title and not subtitle %}<h2 class="{{ headingClasslist }}"id="{{ slugify(title) }}">{{ title }}</h2>{% endif %}
+  <div class="panels__content">
+    {% if title and not boxed %}<h2 class="{{ headingClasslist }}" id="{{ slugify(title) }}"id="{{ slugify(title) }}">{{ title }}</h2>{% endif %}
+    {% if subtitle and not boxed %}<h3 class="panels__subtitle" id="{{ slugify(subtitle) }}">{{ subtitle }}</h3>{% endif %}
+    <div class="panels__gallery panels__gallery--mobile">
+      {% for image in TimberImage(images) %}
+        {% set alt = image.alt %}
+        {% set largest = image.src|resize(960, 700) %}
+        {% set medium = image.src|resize(480) %}
+        {% set tiny = image.src|resize(10, 10) %}
+        {% if preview %}
+        {% set tiny = largest %}
+        {% endif %}
+        <div class="panels__image">
+          <picture>
+            <source
+            data-srcset="{{ largest }}"
+            media="(min-width: 480px)" />
+            <source
+            data-srcset="{{ medium }}"
+            media="(min-width: 1px)" />
+            <img class="lazy" src="{{ tiny }}" data-src="{{ largest }}" alt="{{ alt }}" />
+          </picture>
+        </div>
+      {% endfor %}
+    </div>
+    {% if boxed %}
+      <div class="panels__box">
+        {% include 'partial/panels-content.twig' %}
+      </div>
+    {% else %}
+      {% include 'partial/panels-content.twig' %}
+    {% endif %}
+  </div>
+  {% if boxed %}
+    <div class="panels__gallery__wrapper">
+      <div class="panels__gallery panels__gallery--desktop">
+        {% for image in TimberImage(images) %}
+          {% set alt = image.alt %}
+          {% set tiny = image.src|resize(20, 10) %}
+          {% set largest = image.src|resize(cropWidth, cropHeight) %}
+
+          {% if preview %}
+          {% set tiny = largest %}
+          {% endif %}
+          <div class="panels__image">
+            <picture>
+              <source data-srcset="{{ largest }}" media="(min-width: 1px)" />
+              <img class="lazy" src="{{ tiny }}" data-src="{{ largest }}" alt="{{ alt }}" />
+            </picture>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% else %}
+    <div class="panels__gallery panels__gallery--desktop">
+      {% for image in TimberImage(images) %}
+        {% set alt = image.alt %}
+        {% set tiny = image.src|resize(20, 10) %}
+        {% set largest = image.src|resize(cropWidth, cropHeight) %}
+
+        {% if preview %}
+        {% set tiny = largest %}
+        {% endif %}
+
+        <div class="panels__image">
+          <picture>
+            <source srcset="{{ largest }}"  media="(min-width: 1px)" />
+            <img src="{{ largest }}" alt="{{ alt }}" />
+          </picture>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+</div>
+</div>
+</div>
+</section>

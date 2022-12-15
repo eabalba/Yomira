@@ -1,0 +1,49 @@
+{% extends 'base.twig' %}
+{% set post_type = '' %}
+
+{% set title = posts_page_title|default('Yomira Stories') %}
+{% set subtitle = posts_page_subtitle %}
+
+{% block content %}
+  {% include 'blocks/title.twig' with {
+    title: title,
+    subtitle: subtitle
+  } %}
+  {% include 'partial/filters.twig' with {
+    filters: all_tags
+  } %}
+  <section class="grid">
+    <div class="grid__contents">
+      {% for post in posts %}
+        {% set post_type = post.post_type %}
+        {% if loop.index == 1 %}
+          {% include 'partial/item-featured.twig' %}
+        {% else %}
+          {% include [
+            'partial/item-' ~ post.post_type ~ '.twig',
+            'partial/item.twig'
+          ] %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="items__more"
+          data-tag="all"
+          data-page="1"
+          data-max-count="{{ posts_count }}"
+          data-inital-count="10"
+          data-type="{{ post_type }}">
+          {% if posts_count > 10 %}
+            <button id="collection-load-more">
+              Load More {{ post_type }}s
+            </button>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+  </div>
+  {{ posts_page_content }}
+{% endblock %}

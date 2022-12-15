@@ -1,0 +1,79 @@
+{% extends 'base.twig' %}
+
+{% set classList = 'post' ~ ' post--' ~ post.post_type %}
+
+
+{% block content %}
+
+    {{ post.content }}
+
+
+  {% if yachts %}
+
+       {% set currenttitle =  post.title %}
+
+ 
+
+    {% set summercount = 0 %}
+    {% set wintercount = 0 %}
+    {% for yacht in yachts %}
+      {% if yacht.post_status == 'publish' %}
+        {% for location in Post(yacht.summer_location) %}
+          {% if location.title == currenttitle %} 
+            {% set summercount = summercount + 1 %}
+            {% endif %}
+        {% endfor %}
+        {% for location in Post(yacht.winter_location) %}
+            {% if location.title == currenttitle %} 
+          {% set wintercount = wintercount + 1 %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %} 
+
+
+    <!--============ SUGGESTIONS BLOCK =================-->
+      <section id="suggestion-block" class="block background-color background-color-grey suggestion-block">
+          <div class="container suggestion-container">
+              <div class="section-title">{% if post.related_yachts_section_heading %}<h2>  {{ post.related_yachts_section_heading }}</h2> {% else %} <h2> Choose a Superyacht</h2> {% endif %}</div>
+               <div class="chartered-yachts-tabs">
+                {% if summercount > 0 and  wintercount > 0 %}
+                  <h3 data-season="summer" class="chartered-tab tab">Summer</h3>
+                  <h3 data-season="winter" class="chartered-tab tab">Winter</h3>
+                  <h3 data-season="all" class="chartered-tab tab current-chartered-tab">All</h3>
+                {% endif %}
+              </div>
+              <div class="suggestion-columns suggestions-slider">
+                {% for yacht in yachts %}
+                  {% if yacht.post_status == 'publish' %}
+                    {% set title = yacht.title %}
+                    {% set link = yacht.link %}
+                    {% set excerpt = yacht.brief_description %}
+                    {% set summer_location = yacht.summer_location %}
+                    {% set winter_location = yacht.winter_location %}
+
+                    <div class="suggestion-column 
+                    {% for location in Post(yacht.summer_location) %}
+                      {% if location.title == currenttitle %} summer {% endif %} 
+                    {% endfor %} 
+                    {% for location in Post(yacht.winter_location) %} 
+                      {% if location.title == currenttitle %} winter {% endif %} 
+                    {% endfor %}">                    <div class="suggestion-column-top">
+                        <img src="{{ yacht.thumbnail.src|resize(600, 400) }}" alt="{{ yacht.thumbnail.alt }}"/>
+                        <p class="suggestion-title"> {{ title }}</p>
+                        {% if excerpt %}
+                          <p>{{ excerpt }}</p>
+                        {% else %}
+                          {{ content }}
+                        {% endif %}
+                      </div>
+                      <div><a class="button" href="{{ link }}">View</a></div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+          </div>
+      </section>
+
+  {% endif %}
+{% endblock %}

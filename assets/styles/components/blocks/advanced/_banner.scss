@@ -1,0 +1,48 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $ADVANCED BANNER
+ * -----------------------------------------------------------------------------
+ */
+
+.advanced-banner {
+  height: 0;
+  margin-bottom: 64px;
+  margin-top: 64px;
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
+
+  @include bp-min-width($bp-xl) {
+    margin-bottom: 60px;
+    margin-top: 60px;
+    padding-top: 45%;
+  }
+
+  .lazy-group,
+  img,
+  picture,
+  video {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.js-enabled {
+  .advanced-banner > * {
+    opacity: 0;
+    transform: translateX(-200px);
+    transition: 2.4s opacity ease, 2s transform ease;
+    will-change: opacity, transform;
+  }
+
+  .advanced-banner.inview > * {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}

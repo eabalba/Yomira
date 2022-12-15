@@ -1,0 +1,63 @@
+{% set facebook = options.facebook_url %}
+{% set linkedin = options.linkedin_url %}
+{% set twitter = options.twitter_url %}
+{% set instagram = options.instagram_url %}
+{% set vimeo = options.vimeo_url %}
+
+<nav class="social-navigation">
+  {% if facebook %}
+    <a
+      {% if facebook != "https://google.com" %}
+      href="{{ facebook }}"
+      {% endif %}
+      target="_blank"
+      rel="noopener noreferrer">
+        {% include 'icons/brands/facebook.twig' %}
+      <span class="hide">Facebook</span>
+    </a>
+  {% endif %}
+  {% if linkedin %}
+    <a
+      {% if linkedin != "https://google.com" %}
+      href="{{ linkedin }}"
+      {% endif %}
+      target="_blank"
+      rel="noopener noreferrer">
+        {% include 'icons/brands/linkedin.twig' %}
+      <span class="hide">LinkedIn</span>
+    </a>
+  {% endif %}
+  {% if twitter %}
+    <a
+      {% if twitter != "https://google.com" %}
+      href="{{ twitter }}"
+      {% endif %}
+      target="_blank"
+      rel="noopener noreferrer">
+        {% include 'icons/brands/twitter.twig' %}
+      <span class="hide">Twitter</span>
+    </a>
+  {% endif %}
+  {% if instagram %}
+    <a
+      {% if instagram != "https://google.com" %}
+      href="{{ instagram }}"
+      {% endif %}
+      target="_blank"
+      rel="noopener noreferrer">
+        {% include 'icons/brands/instagram.twig' %}
+      <span class="hide">Instagram</span>
+    </a>
+  {% endif %}
+  {% if vimeo %}
+    <a
+      {% if vimeo != "https://google.com" %}
+      href="{{ vimeo }}"
+      {% endif %}
+      target="_blank"
+      rel="noopener noreferrer">
+        {% include 'icons/brands/vimeo.twig' %}
+      <span class="hide">Vimeo</span>
+    </a>
+  {% endif %}
+</nav>

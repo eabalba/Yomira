@@ -1,0 +1,14 @@
+{% set gallery = fields.gallery %}
+{% set count = gallery|length %}
+
+{% if gallery %}
+  <section id="{{ id }}" class="{{ className }}">
+    <div class="advanced-gallery__images">
+      {% for image in TimberImage(gallery) %}
+        <div class="image">
+          <img alt="{{ image.alt }}" src="{{ image.src('full') }}" />
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}

@@ -1,0 +1,124 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $HEADING
+ * -----------------------------------------------------------------------------
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin-top: 0;
+  margin-bottom: 32px;
+
+  font-family: var(--fontSecondary);
+  font-weight: var(--weightLight);
+  text-transform: uppercase;
+
+  .post--legal & {
+    font-family: var(--fontPrimary);
+    text-transform: capitalize;
+
+    @include bp-min-width($bp-md) {
+      letter-spacing: 3.15px;
+    }
+  }
+}
+
+h1,
+.h1 {
+  font-size: 40px;
+  letter-spacing: 3.2px;
+  line-height: 50px;
+
+  text-transform: uppercase;
+
+  .post--legal & {
+    font-family: var(--fontSecondary);
+    text-transform: uppercase;
+  }
+
+  @include bp-min-width($bp-md) {
+    font-size: 80px;
+    letter-spacing: 8px;
+    line-height: 103px;
+  }
+}
+
+article h1,
+h2,
+.h2 {
+  font-size: 25px;
+  letter-spacing: 2.5px;
+  line-height: 30px;
+
+  @include bp-min-width($bp-md) {
+    font-size: 40px;
+    letter-spacing: 6px;
+    line-height: 50px;
+  }
+}
+
+article h2,
+h3,
+.h3 {
+  font-size: 18px;
+  letter-spacing: 1.8px;
+  line-height: 23px;
+
+  @include bp-min-width($bp-md) {
+    font-size: 25px;
+    letter-spacing: 3.75px;
+    line-height: 30px;
+  }
+}
+
+article h3,
+h4,
+.h4 {
+  font-size: 18px;
+  letter-spacing: 1.8px;
+  line-height: 23px;
+
+  @include bp-min-width($bp-md) {
+    font-size: 25px;
+    letter-spacing: 3.75px;
+    line-height: 30px;
+  }
+}
+
+article h4,
+h5,
+.h5 {
+  font-size: 18px;
+  letter-spacing: 1.8px;
+  line-height: 23px;
+
+  @include bp-min-width($bp-md) {
+    font-size: 25px;
+    letter-spacing: 3.75px;
+    line-height: 30px;
+  }
+}
+
+article h5,
+h6,
+.h6 {
+  font-size: 18px;
+  letter-spacing: 1.8px;
+  line-height: 23px;
+
+  @include bp-min-width($bp-md) {
+    font-size: 25px;
+    letter-spacing: 3.75px;
+    line-height: 30px;
+  }
+}

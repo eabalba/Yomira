@@ -1,0 +1,17 @@
+<div class="panels__text">
+  {% if title and boxed %}
+    <h2>
+      {{ title }}
+    </h2>
+  {% endif %}
+  {{ text }}
+</div>
+{% if cta %}
+  <div class="panels__button">
+    {% include 'partial/button.twig' with {
+      href: cta.url,
+      target: cta.target,
+      title: cta.title
+    } %}
+  </div>
+{% endif %}

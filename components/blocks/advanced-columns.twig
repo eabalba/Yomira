@@ -1,0 +1,31 @@
+{% set columns = fields.columns %}
+{% set count = columns|length %}
+
+{% if columns %}
+  <section id="{{ id }}" class="{{ className }}">
+    <div class="content">
+      {% for column in columns %}
+        {% set classList = 'column' %}
+        {% set content = column.content %}
+        {% set image = TimberImage(column.image) %}
+        {% set reversed = column.reversed %}
+
+        {% if reversed %}
+          {% set classList = classList ~ ' column--reversed' %}
+        {% endif %}
+
+        <div class="{{ classList }}">
+          <div class="column__image">
+            <div>
+              <img alt="{{ image.alt }}"
+                src="{{ image.src|resize(537, 537) }}" />
+            </div>
+          </div>
+          <div class="column__content">
+            {{ content }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}

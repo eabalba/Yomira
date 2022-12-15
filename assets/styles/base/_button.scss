@@ -1,0 +1,119 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $BUTTON
+ * -----------------------------------------------------------------------------
+ */
+
+button,
+input[type="reset"],
+input[type="submit"],
+.button {
+  @include button-reset();
+
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  padding: 20px 40px;
+  min-width: 140px;
+
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-color: #707070;
+  border-radius: 100px;
+  color: inherit;
+  font-size: 17px;
+  font-weight: var(--weightMedium);
+  letter-spacing: 0px;
+  line-height: 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.2s background-color ease, 0.2s border-color ease,
+    0.2s color ease;
+  will-change: background-color, border-color, color;
+
+  @include bp-min-width($bp-xxxl) {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  @include active-states() {
+    background-color: var(--black);
+    border-color: var(--black);
+    color: var(--white);
+    outline: none;
+    text-decoration: none;
+  }
+}
+
+button[disabled] {
+  opacity: 0.85;
+
+  @include active-states() {
+    background-color: inherit;
+    border-color: inherit;
+    color: inherit;
+    outline: inherit;
+    text-decoration: inherit;
+
+    opacity: 0.85;
+  }
+}
+
+.button--active {
+  border-color: #707070;
+}
+
+.button--complex {
+  display: inline-flex;
+  min-width: 250px;
+  position: relative;
+
+  border-color: transparent;
+
+  @include active-states() {
+    background-color: inherit;
+    border-color: transparent;
+    color: inherit;
+  }
+
+  svg {
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.button__path {
+  fill: transparent;
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+  stroke-width: 2;
+}
+
+.button__path--animatable {
+  stroke-dasharray: var(--border-length);
+  stroke-dashoffset: var(--border-length);
+  transition: stroke-dashoffset 0s linear;
+  will-change: stroke-dashoffset;
+}
+
+.button--animate {
+  .button__path {
+    display: none;
+  }
+
+  .button__path + .button__path {
+    display: inherit;
+  }
+}
+
+.button__path--animate {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.8s linear;
+  will-change: stroke-dashoffset;
+}

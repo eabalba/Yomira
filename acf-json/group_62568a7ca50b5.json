@@ -1,0 +1,147 @@
+{
+    "key": "group_62568a7ca50b5",
+    "title": "Post Type: Location",
+    "fields": [
+        {
+            "key": "field_62568a8491a53",
+            "label": "Related Yachts Section Heading",
+            "name": "related_yachts_section_heading",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_6295e08fe665e",
+            "label": "Brief Description",
+            "name": "brief_description",
+            "type": "wysiwyg",
+            "instructions": "Displays on destination block",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_62a9f758354df",
+            "label": "Hide Location from Destinations Page?",
+            "name": "hide_location_from_destinations_page",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_62a715253054c",
+            "label": "Link to...",
+            "name": "link_to",
+            "type": "select",
+            "instructions": "Where should the link go to on a destinations block?",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_62a9f758354df",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "destination": "Destination",
+                "contact": "Contact Page"
+            },
+            "default_value": "destination",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_62a715713054d",
+            "label": "Contact Link Text",
+            "name": "contact_link_text",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_62a715253054c",
+                        "operator": "==",
+                        "value": "contact"
+                    },
+                    {
+                        "field": "field_62a9f758354df",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "location"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1655306549
+}

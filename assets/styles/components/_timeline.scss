@@ -1,0 +1,148 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $TIMELINE
+ * -----------------------------------------------------------------------------
+ */
+
+.timeline {
+  align-items: center;
+  display: none;
+  height: 100%;
+  justify-content: center;
+  right: 16px;
+  position: fixed;
+  top: 0;
+
+  font-family: var(--fontPrimary);
+  font-size: 16px;
+  letter-spacing: 1.6px;
+  line-height: 15px;
+  pointer-events: none;
+
+  @include bp-min-width(1180px) {
+    display: flex;
+  }
+
+  * {
+    pointer-events: initial;
+  }
+
+  @include active-states() {
+    a {
+      font-weight: initial;
+    }
+  }
+
+  a {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 12px 0;
+    position: relative;
+
+    transition: 0.4s margin ease, 0.4s font-weight ease;
+    will-change: margin, font-weight;
+
+    @include active-states() {
+      font-weight: 600;
+      text-decoration: none;
+    }
+  }
+
+  .lazy-group,
+  img,
+  picture,
+  video {
+    border-radius: 50%;
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    object-fit: cover;
+    object-position: center;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      height: calc(100% - 64px);
+      left: 50%;
+      position: absolute;
+      top: 32px;
+      width: 1px;
+      z-index: -1;
+
+      background-color: #707070;
+      opacity: 0.25;
+      transform: translateX(calc(-50% - 3px));
+    }
+  }
+}
+
+.timeline__image {
+  border-radius: 50%;
+  display: block;
+  height: 50px;
+  margin-right: 7.5px;
+  position: relative;
+  width: 50px;
+
+  font-size: 0px;
+  transform: scale(1) translateX(0);
+  transition: 0.4s transform ease;
+  will-change: transform;
+}
+
+.timeline__title {
+  display: block;
+  right: 70px;
+  position: absolute;
+  top: 50%;
+
+  transform: translate(0px, -50%);
+  transition: 0.4s transform ease;
+  will-change: transform;
+
+  white-space: nowrap;
+}
+
+.timeline__border {
+  border-radius: 100%;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  border: 2px solid #e0502c;
+  opacity: 0;
+  transform: scale(1.15);
+  transition: 0.4s opacity ease;
+  will-change: opacity;
+}
+
+a.timeline__item--active {
+  margin: 10px 0;
+  font-weight: 600;
+
+  .timeline__border {
+    opacity: 1;
+  }
+
+  .timeline__image {
+    transform: scale(1.5);
+  }
+
+  .timeline__title {
+    transform: translate(-10px, -50%);
+  }
+}

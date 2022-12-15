@@ -1,0 +1,18 @@
+{% set related = page.meta('related')|default(latest_posts) %}
+{% set title = title|default('Related Articles') %}
+
+<section class="related">
+  <h2 class="h3" id="{{ slugify(title) }}">
+    {{ title }}
+  </h2>
+  <section class="grid">
+    <div class="grid__contents">
+      {% for item in Post(related) %}
+        {% include 'partial/item.twig' with {
+          post: item,
+          size: 3
+        } %}
+      {% endfor %}
+    </div>
+  </section>
+</section>

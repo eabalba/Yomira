@@ -1,0 +1,12 @@
+<figure>
+  <div class="figure__image">
+    {% include 'partial/picture.twig' with {
+      image: image
+    } %}
+  </div>
+  {% if image.caption %}
+    <figcaption>
+      {{ image.caption }}
+    </figcaption>
+  {% endif %}
+</figure>

@@ -1,0 +1,159 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $FILTERS
+ * -----------------------------------------------------------------------------
+ */
+
+.filters {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 48px auto 24px;
+
+  text-align: center;
+
+  @include bp-min-width($bp-sm) {
+    margin: 64px auto 32px;
+  }
+
+  @include bp-min-width($bp-md) {
+    flex-direction: row;
+    margin: 80px auto 40px;
+  }
+
+  @include bp-min-width($bp-xl) {
+    margin: 120px auto 60px;
+  }
+
+  > button:first-of-type {
+    text-transform: initial;
+
+    @include active-states() {
+      border-color: transparent;
+    }
+  }
+
+  button {
+    background-color: transparent;
+    border-color: transparent;
+    text-transform: capitalize;
+
+    @include active-states() {
+      border-color: inherit;
+      color: inherit;
+    }
+
+    @include bp-min-width($bp-md) {
+      font-size: 17px;
+      line-height: 20px;
+    }
+
+    @include bp-min-width($bp-xxxl) {
+      font-size: 22px;
+      line-height: 1.5;
+    }
+  }
+
+  button + button {
+    margin-top: 24px;
+
+    @include bp-min-width($bp-md) {
+      margin-left: 40px;
+      margin-top: 0;
+    }
+
+    @include bp-min-width($bp-lg) {
+      margin-left: 64px;
+    }
+
+    @include bp-min-width($bp-xl) {
+      margin-left: 80px;
+    }
+  }
+
+  .button--active {
+    background-color: inherit;
+    border-color: inherit;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  .button__icon {
+    display: inline-block;
+    margin-left: 12px;
+
+    svg {
+      height: 6px;
+    }
+  }
+}
+
+.filters__list {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+
+  @include bp-min-width($bp-md) {
+    flex-direction: row;
+
+    margin-left: 40px;
+    margin-top: 0;
+  }
+
+  @include bp-min-width($bp-lg) {
+    margin-left: 64px;
+  }
+
+  @include bp-min-width($bp-xl) {
+    margin-left: 80px;
+  }
+
+  button {
+    display: none;
+
+    @include bp-min-width($bp-md) {
+      display: flex;
+    }
+  }
+}
+
+.filters--open {
+  .filters__list {
+    button {
+      display: flex;
+    }
+  }
+}
+
+.filters > span,
+.filters__toggle {
+  font-weight: var(--weightDefault);
+
+  border-color: transparent;
+}
+
+.filters > span {
+  display: none;
+  min-width: 0px;
+  padding: 0;
+
+  @include active-states() {
+    background-color: transparent;
+    border-color: transparent;
+    color: inherit;
+  }
+
+  @include bp-min-width($bp-md) {
+    display: block;
+  }
+}
+
+.filters__toggle {
+  @include bp-min-width($bp-md) {
+    display: none;
+  }
+}

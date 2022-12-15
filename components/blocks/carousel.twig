@@ -1,0 +1,136 @@
+{% set carousel = fields.carousel %}
+{% set cta = fields.cta %}
+{% set title = fields.title %}
+
+{# Get the ID for the carousel based on the first item in the carousel items #}
+{% set item = carousel|first %}
+{% set id = 'carousel-' %}
+{% set post = TimberPost(item.post) %}
+{% if item.post %}
+  {% set id = id ~ slugify(item.title|default(post.title)) %}
+{% else %}
+  {% set id = id ~ slugify(item.title) %}
+{% endif %}
+
+{% if carousel %}
+  <section id="{{ id }}" class="{{ className }} section--light">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="carousel__contents">
+            {% if title %}
+              <h2 class="carousel__title" id="{{ slugify(title) }}">
+                {{ title }}
+              </h2>
+            {% endif %}
+            <div class="carousel__slider">
+              {% for item in carousel %}
+                {% set image = TimberImage(item.image) %}
+                {% set post = TimberPost(item.post) %}
+                {% set link = item.link %}
+                {% set title = item.title %}
+                {% set subtitle = item.subtitle %}
+
+                {% if item.post %}
+                  {% set plural = post.post_type ~ 's' %}
+                  {% set title = item.title|default(post.title) %}
+                  {% set subtitle = item.subtitle|default(plural) %}
+
+                  <div class="carousel__item">
+                    <div class="carousel__item__text">
+                      <h2 class="h3" id="{{ slugify(subtitle) }}">
+                        {{ subtitle }}
+                      </h2>
+                      <h3 class="h2" id="{{ slugify(title) }}">
+                        {{ title }}
+                      </h3>
+                    </div>
+                    <div class="carousel__item__media">
+                      <a href="{{ post.link }}"></a>
+
+                      {% if post.get_thumbnail %}
+                        {% set image = post.thumbnail %}
+                        {% set alt = image.alt %}
+                        {% set largest = image.src|resize(1970, 850) %}
+                        {% set large = image.src|resize(1600, 691) %}
+                        {% set medium = image.src|resize(960, 415) %}
+                        {% set smallest = image.src|resize(700, 302) %}
+                        {% set small = image.src|resize(450, 194) %}
+                        {% set tiny = image.src|resize(10, 10) %}
+
+                        {% if preview %}
+                          {% set tiny = largest %}
+                        {% endif %}
+
+                        <picture>
+                          <source data-srcset="{{ largest }}"
+                            media="(min-width: 1600px)" />
+                          <source data-srcset="{{ large }}"
+                            media="(min-width: 960px)" />
+                          <source data-srcset="{{ medium }}"
+                            media="(min-width: 700px)" />
+                          <source data-srcset="{{ smallest }}"
+                            media="(min-width: 450px)" />
+                          <source data-srcset="{{ small }}"
+                            media="(min-width: 1px)" />
+                          <img class="lazy" src="{{ tiny }}" data-="{{ largest }}"
+                            alt="{{ alt }}" />
+                        </picture>
+                      {% else %}
+                        {% include 'partial/placeholder.twig' %}
+                      {% endif %}
+                    </div>
+                  </div>
+                {% else %}
+                  {% if image %}
+                    <div class="carousel__item">
+                      <div class="carousel__item__text">
+                        <h2 class="h3" id="{{ slugify(subtitle) }}">
+                          {{ subtitle }}
+                        </h2>
+                        <h3 class="h2" id="{{ slugify(title) }}">
+                          {{ title }}
+                        </h3>
+                      </div>
+                      <div class="carousel__item__media">
+                        {% if link %}
+                          <a href="{{ link.url }}" target="{{ link.target }}">
+                            <span class="hidden">{{ link.title }}</span>
+                          </a>
+                        {% endif %}
+                        <picture>
+                          <source data-srcset="{{ largest }}"
+                            media="(min-width: 1600px)" />
+                          <source data-srcset="{{ large }}"
+                            media="(min-width: 960px)" />
+                          <source data-srcset="{{ medium }}"
+                            media="(min-width: 700px)" />
+                          <source data-srcset="{{ smallest }}"
+                            media="(min-width: 450px)" />
+                          <source data-srcset="{{ small }}"
+                            media="(min-width: 1px)" />
+                          <img class="lazy" src="{{ tiny }}" data-src="{{ largest }}"
+                            alt="{{ alt }}" />
+                        </picture>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
+            {% if cta %}
+              <div class="carousel__cta">
+                {% include 'partial/button.twig' with {
+                  class: 'button--solid',
+                  href: cta.url,
+                  target: cta.target,
+                  title: cta.title
+                } %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}

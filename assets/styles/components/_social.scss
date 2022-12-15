@@ -1,0 +1,40 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $SOCIAL
+ * -----------------------------------------------------------------------------
+ */
+
+.social {
+  display: flex;
+  justify-content: flex-end;
+
+  @include bp-min-width($bp-lg) {
+    flex-direction: column;
+  }
+
+  a {
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    height: 48px;
+    justify-content: center;
+    width: 48px;
+
+    background-color: transparent;
+    border: 1px solid rgba(#707070, 0.2);
+    color: #5e5e5e;
+  }
+
+  a + a {
+    margin-left: 12px;
+
+    @include bp-min-width($bp-lg) {
+      margin-left: 0;
+      margin-top: 24px;
+    }
+  }
+
+  svg {
+    height: 18px;
+  }
+}

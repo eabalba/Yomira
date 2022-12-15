@@ -1,0 +1,93 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $ADVANCED
+ * -----------------------------------------------------------------------------
+ */
+
+.page-template-template-advanced {
+  overflow-x: hidden;
+
+  main {
+    @include bp-min-width(1180px) {
+      max-width: calc(100% - 400px);
+    }
+
+    @include bp-min-width($bp-xl) {
+      max-width: 1100px;
+    }
+
+    @include bp-min-width($bp-xxl) {
+      max-width: 1504px;
+    }
+
+    @include bp-min-width($bp-xxxl) {
+      margin: 0 auto;
+    }
+
+    > aside + * {
+      padding-top: calc(var(--header-height) + 64px);
+
+      @include bp-min-width($bp-md) {
+        padding-top: calc(var(--header-height) + 92px);
+      }
+
+      @include bp-min-width($bp-xl) {
+        padding-top: calc(var(--header-height) + 128px);
+      }
+    }
+
+    > *:not(section) {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 812px;
+
+      padding-left: 36px;
+      padding-right: 36px;
+
+      @include bp-min-width($bp-xl) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    > h2,
+    > h3 {
+      @include bp-min-width($bp-md) {
+        margin-bottom: 48px;
+      }
+    }
+
+    > figure {
+      margin: 40px auto;
+
+      @include bp-min-width($bp-lg) {
+        margin: 144px auto;
+      }
+    }
+
+    .contact {
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      margin-top: 100px;
+      position: relative;
+      width: 100vw;
+      z-index: 10;
+
+      @include bp-min-width(1180px) {
+        margin-left: calc((-50vw + 50%) + (100vw - 100%) / 2);
+      }
+
+      @include bp-min-width($bp-xl) {
+        margin-top: 200px;
+      }
+
+      @include bp-min-width($bp-xxl) {
+        margin-left: calc((-50vw + 50%) + (100vw - 1504px) / 2);
+      }
+
+      @include bp-min-width(2400px) {
+        margin-left: calc(-50vw + 50%);
+      }
+    }
+  }
+}

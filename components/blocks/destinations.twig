@@ -1,0 +1,53 @@
+ {% if  Post(fields.destinations) %}
+    {% for destination in Post(fields.destinations) %}
+        {% set title = destination.title %}
+        {% set link = destination.link %}
+        {% set excerpt = destination.brief_description %}
+        <section  class="block charter-destination-block">
+            <div class="container charter-destination-container ">
+                <img class="charter-destination-image" src="{{ destination.thumbnail.src }}" alt="{{ destination.thumbnail.alt }}"/>
+
+                <div class="charter-destination-textbox">
+                    <div class="section__title">
+                        <h2>{{ title }}</h2>
+                    </div>
+                    <div class="charter-destination-textbox-blurb">
+                        <p>{{ excerpt }}</p>
+                    </div>
+                    <div class="buttons">
+                    
+                        {% if destination.children('location') %}<button class="button charterToggle" id="charterToggle-{{ title }}" onclick="showCountries('{{ title }}')"><span class="state">Show</span> countries <i class="arrow down"></i></button>{% endif %}
+                        {% if destination.link_to == 'destination' %}
+                            <a class="button" href="{{ link }}">Discover more <i class="arrow right"></i></a>
+                        {% endif %}
+                        {% if destination.link_to == 'contact' %}
+                            <a class="button" href="{{ site.link }}/contact">{{destination.contact_link_text}} <i class="arrow right"></i></a>
+                        {% endif %}
+                    </div>
+                </div>  
+            </div>
+            {% if destination.children('location') %}
+                <div class="charter-country-destination-container" id="country-{{ title }}">
+                    <div class="charter-country-slider container ">
+                        {% for child in destination.children('location') %}
+                            {% if child.hide_location_from_destinations_page == 0 %}
+
+                                <div class="charter-country">
+                                    {% if child.link_to == 'contact' %}
+                                    <a href="{{ site.link }}/contact">
+                                {% else %}
+                                    <a href="{{ child.link }}">
+                                {% endif %}
+                                        <img  src="{{ child.thumbnail.src }}" alt="{{ child.thumbnail.alt }}">
+                                        <h3 class="charter-country-name">{{ child.title }}</h3>
+                                    </a>
+                                </div>
+                             {% endif %}
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            {% endif %}
+        </section>
+    {% endfor %}
+{% endif %}

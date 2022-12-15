@@ -1,0 +1,160 @@
+{% set content = fields.content|default(content) %}
+{% set mandatory_label = fields.mandatory_label|default(mandatory_label) %}
+{% set label_name = fields.label_name|default(label_name) %}
+{% set label_email = fields.label_email|default(label_email) %}
+{% set label_phone = fields.label_phone|default(label_phone) %}
+{% set label_interested = fields.label_interested|default(label_interested) %}
+{% set label_message = fields.label_message|default(label_message) %}
+{% set consent_label_one =
+  fields.consent_label_one|default(consent_label_one)
+%}
+{% set consent_label_two =
+  fields.consent_label_two|default(consent_label_two)
+%}
+{% set submit_text = fields.submit_text|default(submit_text) %}
+{% set message_error = fields.message_error|default(message_error) %}
+{% set message_onsuccess =
+  fields.message_onsuccess|default(message_onsuccess)
+%}
+
+{% set title = fields.title|default(title) %}
+{% set className = className|default('contact block--contact') %}
+
+<section id="{{ id }}" class="{{ className }}">
+  <div class="container">
+    <div class="row">
+     
+        {% if fields.testimonials %} 
+        {% set testimonials = fields.testimonials %}   
+          <div class="col">
+            <div class="testimonial-column">
+              <div class="testimonial-slider">
+              {% for testimonial in testimonials %}
+                  <p class="testimonial-header">{{testimonial.testimonial_heading}}</p>
+                  <p class="testimonial-content">
+                      {{testimonial.testimonial}}
+                  </p>
+                  <p class="testimonial-name">
+                      {{testimonial.citation_name}}
+                  </p>
+                  <p class="testimonial-info">
+                      {{testimonial.yacht_details}}
+                  </p>
+                 {% endfor %}
+              </div>
+            </div>
+          </div>
+     {% endif %}
+      <div class="col">
+        <div class="contact__contents">
+          <div class="contact__content">
+            {% if title %}
+              <h2>
+                {{ title }}
+              </h2>
+            {% endif %}
+            {% if content %}
+              {{ content }}
+            {% endif %}
+          </div>
+          <div class="contact__form">
+            {% if mandatory_label %}
+              <p>
+                {{ mandatory_label }}
+              </p>
+            {% endif %}
+            {% if message_error %}
+              <div class="message hubspot--error hide">
+                <p>
+                  {{ message_error }}
+                </p>
+              </div>
+            {% endif %}
+            {% if message_onsuccess %}
+              <div class="message hubspot--success hide">
+                <p>
+                  {{ message_onsuccess }}
+                </p>
+              </div>
+            {% endif %}
+            <form class="form--hubspot">
+              <div class="hs-form-field">
+                <input id="name"
+                  name="name"
+                  type="text"
+                  placeholder=""
+                  onchange="this.setAttribute('value', this.value);"
+                  required=""
+                  value="" />
+                <label for="name">{{ label_name }}</label>
+              </div>
+              <div class="hs-form-field">
+                <input id="email"
+                  name="email"
+                  type="email"
+                  placeholder=""
+                  onchange="this.setAttribute('value', this.value);"
+                  required=""
+                  value="" />
+                <label for="email">{{ label_email }}</label>
+              </div>
+              <div class="hs-form-field">
+                <input id="phone"
+                  name="phone"
+                  placeholder=""
+                  onchange="this.setAttribute('value', this.value);"
+                  type="telephone"
+                  value="" />
+                <label for="phone">{{ label_phone }}</label>
+              </div>
+              <div class="hs-form-field">
+                <select id="interest" name="interest" required="">
+                  <option value="">
+                    {{ label_interested }}
+                  </option>
+                  <option value="chartering">
+                    Chartering a yacht
+                  </option>
+                  <option value="buying">
+                    Buying a yacht
+                  </option>
+                  <option value="press">
+                    Press enquiry
+                  </option>
+                  <option value="general">
+                    General enquiry
+                  </option>
+                </select>
+              </div>
+              <div class="hs-form-field">
+                <textarea id="message"
+                  placeholder=""
+                  onchange="this.setAttribute('value', this.value);"
+                  name="message"
+                  value=""></textarea>
+                <label for="message">{{ label_message }}</label>
+              </div>
+              <div class="contact____footer">
+                <div>
+                  <div class="hs-form-checkbox">
+                    <input id="consent"
+                      name="consent"
+                      type="checkbox"
+                      required />
+                    <label for="consent">{{ consent_label_one }}</label>
+                  </div>
+                  <div class="hs-form-checkbox">
+                    <input id="marketing" name="marketing" type="checkbox" />
+                    <label for="marketing">{{ consent_label_two }}</label>
+                  </div>
+                </div>
+                <button disabled type="submit">{{ submit_text }}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</section>

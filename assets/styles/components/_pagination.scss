@@ -1,0 +1,156 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $PAGINATION
+ * -----------------------------------------------------------------------------
+ */
+
+.pagination {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 96px auto 160px;
+
+  font-weight: var(--weightMedium);
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  text-transform: capitalize;
+
+  @include bp-min-width($bp-sm) {
+    font-size: 17px;
+  }
+
+  @include bp-min-width($bp-xxxl) {
+    font-size: 22px;
+    line-height: 1.5;
+  }
+
+  a {
+    display: none;
+    padding: 0 11px;
+
+    color: #c7c7c7;
+    transition: 0.2s color ease;
+    will-change: color;
+
+    @include bp-min-width($bp-sm) {
+      display: inline-block;
+      padding: 0 4px;
+    }
+  }
+
+  a:first-of-type {
+    padding-left: 0;
+    padding-right: 22px;
+
+    + a {
+      margin-left: 0;
+    }
+
+    @include bp-min-width($bp-sm) {
+      padding-right: 64px;
+    }
+
+    @include bp-min-width($bp-md) {
+      margin-right: 16px;
+    }
+  }
+
+  a:last-of-type {
+    padding-left: 22px;
+    padding-right: 0;
+
+    @include bp-min-width($bp-sm) {
+      padding-left: 64px;
+    }
+
+    @include bp-min-width($bp-md) {
+      margin-left: 16px;
+    }
+  }
+
+  a + a {
+    margin-left: 22px;
+  }
+
+  a:active,
+  a:focus,
+  a:hover,
+  .current,
+  .pagination__link--current {
+    color: inherit;
+    text-decoration: underline;
+
+    &.dots,
+    &[disabled] {
+      color: #c7c7c7;
+      text-decoration: none;
+    }
+  }
+
+  .pagination__next,
+  .pagination__previous,
+  .pagination__link--current,
+  .pagination__link--next,
+  .pagination__link--previous {
+    display: inline-block;
+  }
+
+  .pagination__next,
+  .pagination__previous {
+    text-align: right;
+  }
+
+  .pagination__previous {
+    text-align: left;
+  }
+
+  svg {
+    max-width: 6px;
+    width: 100%;
+
+    color: var(--black);
+    transition: 0.2s color ease;
+    will-change: color;
+
+    @include bp-min-width($bp-sm) {
+      max-width: 9px;
+    }
+  }
+
+  a[disabled] {
+    svg {
+      color: #c7c7c7;
+    }
+
+    @include active-states() {
+      svg {
+        color: #c7c7c7;
+      }
+    }
+  }
+
+  a {
+    @include active-states() {
+      svg {
+        color: var(--black);
+      }
+    }
+  }
+}
+
+.pagination--dots {
+  a {
+    display: inline-block;
+  }
+
+  .dots ~ a {
+    display: none;
+  }
+
+  a.current,
+  a:last-of-type {
+    display: inline-block;
+  }
+}

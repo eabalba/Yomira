@@ -1,0 +1,63 @@
+{% set columns = fields.columns|default(columns) %}
+{% set count = columns|length %}
+{% set image = TimberImage(fields.image) %}
+{% set title = fields.title|default(title) %}
+
+{% if columns %}
+  <section id="{{ id }}" class="{{ className }}">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="columns__contents">
+            {% if title %}
+              <h2 class="columns__title columns__title--mobile"
+                id="{{ slugify(title) }}">
+                <span>{{ title }}</span>
+              </h2>
+            {% endif %}
+            <div class="columns__media">
+              <div class="columns__media__inner">
+                {% set alt = image.alt %}
+                {% set largest = image.src|resize(1970, 1080) %}
+                {% set large = image.src|resize(1600, 878) %}
+                {% set medium = image.src|resize(960, 527) %}
+                {% set smallest = image.src|resize(700, 384) %}
+                {% set small = image.src|resize(450, 247) %}
+
+                <picture>
+                  <source srcset="{{ largest }}"
+                    media="(min-width: 1600px)" />
+                  <source srcset="{{ large }}" media="(min-width: 960px)" />
+                  <source srcset="{{ medium }}"
+                    media="(min-width: 700px)" />
+                  <source srcset="{{ smallest }}"
+                    media="(min-width: 450px)" />
+                  <source srcset="{{ small }}" media="(min-width: 1px)" />
+                  <img src="{{ largest }}"
+                    alt="{{ alt }}" />
+                </picture>
+              </div>
+            </div>
+            <div class="columns__content">
+              {% if title %}
+                <h2 class="columns__title columns__title--desktop"
+                  id="{{ slugify(title) }}-desktop">
+                  <span>{{ title }}</span>
+                </h2>
+              {% endif %}
+              {% if columns %}
+                {% for column in columns %}
+                  {% set content = column.content %}
+                  {% set index = loop.index %}
+                  <div class="columns__item">
+                    {{ content }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}

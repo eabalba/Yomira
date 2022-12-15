@@ -1,0 +1,50 @@
+<!--============ CREW BLOCK =================-->
+<section id="crew-block" class="block crew-block"> 
+    <div class="container crew-block-container">
+        <div class="section-title">{{ fields.crew_section_heading }}</div>
+        <div class="crew-container">
+            <div class="focus-window-column">
+                 {% set crews = fields.crew %}
+                {% for crew in crews %}
+                    <div id="{{ crew.name|replace({' ': ''}) }}" class="crew-info-content icon-content">
+                        {% set image = TimberImage(crew.photo) %}
+                        {% if  image  %}
+                            <img src="{{ image.src }}" class="lazy"  alt="{{ image.alt }}" />
+                        {% endif %}
+                        <p class="crew-name">{{ crew.name }}</p>
+                         {% if crew.title %}
+                            <p class="crew-title">{{ crew.title }}</p>
+                         {% endif %}
+                        {{ crew.bio }}
+                    </div>
+                 {% endfor %}
+               
+                
+            </div>
+
+            <div class="crew-list-column">
+                <div class="crew-list-slider">
+                     {% for crew in crews %}
+                        <a href="#{{ crew.name|replace({' ': ''}) }}" id="crew-icon" class="crew-icon active-icon" onclick="focusCrew(event,'{{ crew.name|replace({' ': ''}) }}')"> 
+                            <div class="crew-thumbnail">
+                                 {% set image = TimberImage(crew.photo) %}
+                                {% if  image  %}
+                                    <img src="{{ image.src }}" class="lazy"  alt="{{ image.alt }}" />
+                                {% endif %}
+                            </div>
+                            <p class="crew-name">{{ crew.name }}</p>
+                            {% if crew.title %}
+                                <p class="crew-title">{{ crew.title }}</p>
+                            {% endif %}
+                       </a>
+                     {% endfor %}
+                    
+                </div>
+
+                <div class="crew-caveat">
+                    {{ fields.crew_footer }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,13 @@
+{% if accepted_tracking == null %}
+  <section class="cookies section--light">
+    <div class="cookies__contents">
+      <div class="cookies__content">
+        {{ options.cookies_banner }}
+      </div>
+      <nav>
+        <button class="cookies__accept">Accept</button>
+        <button class="cookies__reject">Disallow</button>
+      </nav>
+    </div>
+  </section>
+{% endif %}

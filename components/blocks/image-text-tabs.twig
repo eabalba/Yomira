@@ -1,0 +1,64 @@
+
+
+<!--============ ADVENTURES BLOCK =================-->
+<section id="" class="block location-adventures-block">
+    <div class="container location-adventures-container {{ fields.layout }}">
+        
+
+            <div class="section-title">
+                {{ fields.block_heading }}
+            </div>
+             <div class="location-adventures-tabs">
+                
+                {% set tabs = fields.tabs %}
+                {% if tabs %}
+                    <div class="adventures-tabs tabs">
+                        {% for tab in tabs %}
+                            {% set tab_heading = tab.tab_heading %}
+                            {% set tab_heading_trim = tab.tab_heading|replace({' ': ''}) %}
+                            <div class="adventure-tab-container">
+                            
+                                <h3 id ="tab" class="adventures-tab {% if loop.first %}current-adventures-tab{% endif %}" onclick="adventuresTab(event, '{{ tab_heading_trim }}Content', '{{ tab_heading_trim }}Media')">{{ tab_heading }}</h3>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="location-adventures-description-column">
+                {% set tabs = fields.tabs %}
+                {% if tabs %}
+                    {% for tab in tabs %}
+                        {% set tab_heading = tab.tab_heading %}
+                        {% set tab_heading_trim = tab.tab_heading|replace({' ': ''}) %}
+                        <div id="{{ tab_heading_trim }}Content" class="adventures-tab-content">
+                            <div>
+                            {{ tab.tab_content }}
+                            </div>
+                            <div>
+                                {% set cta = tab.tab_cta %}
+                                {% if cta %}
+                                    <a class="button" href="{{ cta.url }}">{{ cta.title }}</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="location-adventures-media-column">
+            {% set tabs = fields.tabs %}
+                {% if tabs %}
+                    {% for tab in tabs %}
+                        {% set tab_heading = tab.tab_heading %}
+                        {% set tab_heading_trim = tab.tab_heading|replace({' ': ''}) %}
+                        <div id="{{ tab_heading_trim }}Media" class="adventures-media-content">
+                            {% set image = TimberImage(tab.tab_image) %}
+                            {% if  image  %}
+                                    <img src="{{ image.src }}" class="lazy"  alt="{{ image.alt }}" />
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

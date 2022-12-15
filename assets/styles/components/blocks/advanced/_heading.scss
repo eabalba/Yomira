@@ -1,0 +1,49 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $ADVANCED HEADING
+ * -----------------------------------------------------------------------------
+ */
+
+.advanced-heading {
+  padding: 0 36px;
+
+  @include bp-min-width($bp-xl) {
+    padding: 0;
+    padding-left: 140px;
+  }
+
+  h2 {
+    margin: 0;
+    max-width: 812px;
+  }
+
+  & + * {
+    margin-top: 40px;
+
+    @include bp-min-width($bp-xl) {
+      margin-top: 60px;
+    }
+  }
+}
+
+.advanced-heading ~ .advanced-heading {
+  margin-top: 60px;
+
+  @include bp-min-width($bp-xl) {
+    margin-top: 60px;
+  }
+}
+
+.js-enabled {
+  .advanced-heading > * {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1.4s opacity ease, 1.4s transform ease;
+    will-change: opacity, transform;
+  }
+
+  .advanced-heading.inview > * {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

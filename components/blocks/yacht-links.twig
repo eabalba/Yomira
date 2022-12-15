@@ -1,0 +1,53 @@
+     {% set summercount = 0 %}
+    {% set wintercount = 0 %}
+        {% for yacht in Post(fields.related_yachts) %}
+        {% if yacht.post_status == 'publish' %}
+            {% if yacht.summer_location %}
+                {% set summercount = summercount + 1 %}
+            {% endif %}
+            {% if yacht.winter_location %}
+                {% set wintercount = wintercount + 1 %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+ <section id="suggestion-block" class="block  suggestion-block">
+    <div class="container suggestion-container">
+        <div class="section-title">
+            {% if  fields.yachts_heading %} {{ fields.yachts_heading }}  {% else %} <h2> Choose a Superyacht</h2> {% endif %}
+        </div>
+        <div class="chartered-yachts-tabs">
+         {% if summercount > 0 and  wintercount > 0 %}
+            <h3 data-season="summer" class="chartered-tab tab">Summer</h3>
+            <h3 data-season="winter" class="chartered-tab tab">Winter</h3>
+            <h3 data-season="all" class="chartered-tab tab current-chartered-tab">All</h3>
+        {% endif %}
+        </div>
+        <div class="suggestion-columns suggestions-slider">
+            {% for yacht in Post(fields.related_yachts) %}
+                {% if yacht.post_status == 'publish' %}
+                    {% set title = yacht.title %}
+                    {% set link = yacht.link %}
+                    {% set excerpt = yacht.brief_description %}
+                    {% set summer_location = yacht.summer_location %}
+                    {% set winter_location = yacht.winter_location %}
+                
+                    <div class="suggestion-column 
+                        {% if summer_location %} summer {% endif %} 
+                        {% if winter_location %} winter {% endif %} ">
+                        <div class="suggestion-column-top">
+                            <img src="{{ yacht.thumbnail.src|resize(600, 400) }}" alt="{{ yacht.thumbnail.alt }}"/>
+                            <p class="suggestion-title"> {{ title }}</p>
+                            {% if excerpt %}
+                            <p>{{ excerpt }}</p>
+                            {% else %}
+                            {{ content }}
+                            {% endif %}
+                        </div>
+                        <div><a class="button" href="{{ link }}">View</a></div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+      

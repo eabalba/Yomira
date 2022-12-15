@@ -1,0 +1,271 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $ARTICLE
+ * -----------------------------------------------------------------------------
+ */
+
+.privacy-policy article {
+  padding: 0 18px 140px;
+
+  @include bp-min-width($bp-sm) {
+    padding: 0 40px 240px;
+  }
+}
+
+/* Advanced vertical rhythym based off of https://medium.com/@sebastian.eberlein/advanced-vertical-margins-4ac69f032f79 */
+article {
+  padding: 0 18px;
+
+  @include bp-min-width($bp-sm) {
+    padding: 0 40px;
+  }
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  > *:not(section) {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 820px;
+  }
+
+  > * + * {
+    margin-top: 16px;
+  }
+
+  > h2 + * {
+    margin-top: 24px;
+  }
+
+  > img + *,
+  > figure + * {
+    margin-top: 32px;
+  }
+
+  > * + h2 {
+    margin-top: 48px;
+  }
+
+  > * + h3 {
+    margin-top: 32px;
+  }
+
+  > * + img {
+    margin-top: 32px;
+  }
+
+  > * + h4 {
+    margin-top: 24px;
+  }
+
+  > img + img,
+  > figure + figure {
+    margin-top: 32px;
+  }
+
+  > h2 + h3 {
+    margin-top: 32px;
+  }
+
+  > h3 + h4 {
+    margin-top: 32px;
+  }
+
+  > * + h1,
+  > * + h2,
+  > * + h3,
+  > * + h4,
+  > * + h5,
+  > * + h6 {
+    margin-top: 64px;
+
+    @include bp-min-width($bp-md) {
+      margin-top: 96px;
+    }
+  }
+
+  > a,
+  > *:not(section) a {
+    color: $primary;
+    text-decoration: underline;
+    word-break: break-all;
+
+    @include active-states() {
+      text-decoration: none;
+    }
+  }
+
+  time {
+    display: block;
+  }
+}
+
+.post__content {
+  > *:last-child:not(section) {
+    margin-bottom: 140px;
+  }
+}
+
+.post__details {
+  align-items: center;
+  display: flex;
+  margin: 0 auto 48px;
+
+  h2,
+  time {
+    margin: 0;
+  }
+
+  h2 {
+    padding-right: 30px;
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      height: 4px;
+      left: calc(100% - 19px);
+      position: absolute;
+      top: 50%;
+      width: 10px;
+
+      background-color: var(--black);
+      transform: translateY(calc(-50% - 4px));
+    }
+  }
+}
+
+.post--legal {
+  counter-reset: section;
+
+  > *:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
+    font-size: 15px;
+    line-height: 20px;
+
+    @include bp-min-width($bp-md) {
+      color: var(--grey600);
+      font-size: 17px;
+      line-height: 27px;
+    }
+
+    @include bp-min-width($bp-xxxl) {
+      font-size: 22px;
+      line-height: 1.5;
+    }
+  }
+
+  > *:not(section) {
+    @include bp-min-width(1660px) {
+      transform: translateX(178px);
+    }
+  }
+
+  > h1,
+  > * + h2,
+  > * + h3,
+  > * + h4,
+  > * + h5,
+  > * + h6 {
+    position: relative;
+
+    text-transform: initial;
+
+    @include bp-min-width(1660px) {
+      left: 50%;
+      margin-top: 71px;
+      max-width: 468px;
+      position: absolute;
+      width: 100%;
+      transform: translateX(calc(-100% - 300px));
+    }
+
+    & + * {
+      @include bp-min-width(1660px) {
+        margin-top: 96px;
+      }
+    }
+  }
+
+  section + h2,
+  section + h3,
+  section + h4,
+  section + h5,
+  section + h6 {
+    @include bp-min-width(1660px) {
+      margin-top: 0;
+    }
+  }
+
+  section {
+    .col {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .container {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0;
+      padding-right: 0;
+
+      @include bp-min-width($bp-md) {
+        max-width: 100%;
+      }
+    }
+  }
+
+  > * + h2 {
+    padding-left: 24px;
+
+    @include bp-min-width($bp-md) {
+      padding-left: 32px;
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      left: 0;
+      position: absolute;
+      top: 0;
+
+      /* Increment the value of section counter by 1 */
+      counter-increment: section;
+      /* Display the word 'Section ', the value of
+        section counter, and a colon before the content
+        of each heading */
+      content: counter(section) ".";
+    }
+  }
+
+  > h1 {
+    @include bp-min-width(1660px) {
+      margin-top: 0;
+    }
+  }
+
+  > h1 + *:not(section) {
+    @include bp-min-width(1660px) {
+      margin-top: 0;
+    }
+  }
+
+  > h1 + section {
+    @include bp-min-width(1660px) {
+      margin-top: 200px;
+    }
+  }
+
+  > *:last-child {
+    margin-bottom: 140px;
+  }
+}

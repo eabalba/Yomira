@@ -1,0 +1,59 @@
+{% set citation = fields.citation %}
+{% set background = fields.background_colour %}
+{% set colour = fields.colour|default(getContrastColor(background_colour)) %}
+{% set gallery = fields.gallery %}
+{% set gradient = fields.gradient %}
+{% set quotation = fields.quotation %}
+
+{% if background or gradient %}
+  {% set className = className ~ ' quote--background' %}
+{% endif %}
+
+{% if background and not gradient and colour == '#FFFFFF' %}
+  {% set className = className ~ ' section--light' %}
+{% endif %}
+
+{% if gradient %}
+  {% set className = className ~ ' section--light gradient--' ~ gradient %}
+{% endif %}
+
+{% if gallery and gallery|length is even %}
+  {% set className = className ~ ' quote--even' %}
+{% endif %}
+
+{% if gallery and gallery|length is odd %}
+  {% set className = className ~ ' quote--odd' %}
+{% endif %}
+
+<section id="{{ id }}"
+  class="{{ className }}"
+  style="--background: {{
+  background
+  }}; --count:{{ gallery|length }}; --text: {{ colour }};">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="quote__contents">
+          <blockquote>
+            {{ quotation }}
+            {% if citation %}
+              <cite>{{ citation }}</cite>
+            {% endif %}
+          </blockquote>
+          {% if gallery %}
+            <div class="quote__gallery">
+              {% for image in TimberImage(gallery) %}
+                {% set alt = image.alt %}
+                {% set src = image.src|resize(700) %}
+
+                <div class="quote__image">
+                  <img alt="{{ alt }}" src="{{ src }}" />
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

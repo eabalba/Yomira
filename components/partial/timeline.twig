@@ -1,0 +1,29 @@
+{% if headings %}
+  <aside class="timeline">
+    <nav>
+      {% for heading in headings %}
+        {% set index = loop.index %}
+        {% set classList = 'timeline__item' %}
+        {% set id = heading.id %}
+        {% set image = heading.image %}
+        {% set timeline = heading.timeline %}
+        {% set text = heading.text %}
+
+        {% if index == 1 %}
+          {% set classList = classList ~ ' timeline__item--active' %}
+        {% endif %}
+
+        {% if id and image %}
+          <a class="{{ classList }}" href="#{{ id }}">
+            <span class="timeline__title">{{ timeline }}</span>
+            <div class="timeline__image">
+              <img src="{{ image }}" alt="" />
+              <span class="timeline__border"></span>
+            </div>
+            <span class="hidden">Jumps to {{ text }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+  </aside>
+{% endif %}

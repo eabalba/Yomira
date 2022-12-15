@@ -1,0 +1,68 @@
+{% extends 'base.twig' %}
+{% set classList = 'post__intro item--featured' %}
+
+{% set image = post.thumbnail %}
+{% set author = post.author %}
+
+{% set image_src = image.src|resize(1600, 960) %}
+
+{% block content %}
+  <div class="post post--{{ post.post_type }}" id="post-{{ post.ID }}">
+    <nav class="post__breadcrumbs">
+      <a href="{{ posts_page }}">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.082 16.187">
+          <path d="M14.079,8.082h-.87L7.269.81,1.307,8.082H0L6.6,0h.876Z"
+            transform="translate(0.5 15.133) rotate(-90)"
+            fill="currentColor"
+            stroke="currentColor"
+            stroke-width="1" />
+        </svg>Back to stories list
+      </a>
+    </nav>
+    <div class="post__hero">
+      <div class="container">
+        <div class="row">
+          <div class="post__media">
+            {% if image %}
+              <img src="{{ image_src }}" />
+            {% else %}
+              {% include 'partial/placeholder.twig' %}
+            {% endif %}
+          </div>
+          <div class="col col-12 col-lg-4 offset-lg-8">
+            <div class="post__hero__content">
+              {% include 'partial/social.twig' with {
+                page: post
+              } %}
+              <time class="post__date">{{ post.date|date('d.m.yy') }}</time>
+              <h1 class="h2">
+                {{ post.title }}
+              </h1>
+              <div class="post__author">
+                {% if author.meta('user_avatar') %}
+                  {% set avatar = Image(author.meta('user_avatar')) %}
+                  <img alt="Photograph of {{ author.display_name }}"
+                    class="post__avatar"
+                    src="{{ avatar.src|resize(50, 50) }}" />
+                {% else %}
+                  <img alt="Photograph of {{ author.display_name }}"
+                    class="post__avatar"
+                    src="{{ author.avatar.src|resize(50, 50) }}" />
+                {% endif %}
+                <h2>
+                  {{ author.display_name }}
+                </h2>
+              </div>
+              <p class="item__description">
+                {{ post._yoast_wpseo_metadesc }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <article class="post__content">
+      {{ post.content }}
+    </article>
+  </div>
+{% endblock %}

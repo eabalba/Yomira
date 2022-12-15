@@ -1,0 +1,69 @@
+{% set background_colour = fields.background_colour|default('#FFFFFF') %}
+{% set className = fields.className|default(className) %}
+{% set content = fields.content %}
+{% set media = TimberImage(fields.media) %}
+{% set sticky_logo = fields.sticky_logo %}
+{% set tint = fields.tint|default(20) %}
+{% set vimeo = fields.vimeo %}
+
+{% set styles = '' %}
+
+{% if tint %}
+  {% set styles = styles ~ ' --tint: 0.' ~ tint ~ ';' %}
+{% endif %}
+
+{% if background_colour %}
+  {% set styles = styles ~ ' --background_colour: ' ~ background_colour ~ ';' %}
+{% endif %}
+
+{% set className = className ~ ' section--light' %}
+
+<section id="{{ id }}" class="{{ className }}" style="{{ styles }}">
+  {% if sticky_logo %}
+    <div class="hero__sticky">
+      {% include 'vectors/logo.twig' %}
+    </div>
+  {% endif %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="hero__contents">
+          {{ content }}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% if vimeo %}
+      <video loop muted autoplay playsinline>
+        <source src="{{ vimeo }}" type="video/mp4" />Sorry, your browser doesn't
+        support embedded videos.
+      </video>
+  {% endif %}
+  {% if media %}
+    {% set alt = media.alt %}
+    {% set lazy = lazy|default(true) %}
+    {% set largest = media.src|resize(2560, 1920) %}
+    {% set large = media.src|resize(1600, 1080) %}
+    {% set medium = media.src|resize(1200) %}
+    {% set smallest = media.src|resize(700, 1200) %}
+    {% set small = media.src|resize(500, 700) %}
+    {% set tiny = media.src|resize(10, 10) %}
+
+    <picture>
+      <source srcset="{{ largest }}" media="(min-width: 1600px)" />
+      <source srcset="{{ large }}" media="(min-width: 960px)" />
+      <source srcset="{{ medium }}" media="(min-width: 700px)" />
+      <source srcset="{{ smallest }}" media="(min-width: 450px)" />
+      <source srcset="{{ small }}" media="(min-width: 1px)" />
+      <img class="{{ classList }}" src="{{ largest }}" alt="{{ alt }}"   onload="fadeIn(this)" style="display:none;"/>
+    </picture>
+  {% endif %}
+  {% if tint > 0 %}
+    <span class="hero__tint"></span>
+  {% endif %}
+</section>
+<script>
+window.fadeIn = function(obj) {
+    jQuery(obj).fadeIn(1000);
+}
+</script>

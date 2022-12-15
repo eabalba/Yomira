@@ -1,0 +1,91 @@
+<div class="message hubspot--error hide">
+  <p>
+    Sorry there was an issue submitting your form
+  </p>
+</div>
+<div class="message hubspot--success hide">
+  <p>
+    Thank you for your submission, we'll be touch soon
+  </p>
+</div>
+<form class="form--hubspot">
+  <div class="hs-form-field">
+    <input id="name"
+      name="name"
+      type="text"
+      placeholder=""
+      onchange="this.setAttribute('value', this.value);"
+      required=""
+      value="" />
+    <label for="name">Name*</label>
+  </div>
+  <div class="hs-form-field">
+    <input id="email"
+      name="email"
+      type="email"
+      placeholder=""
+      onchange="this.setAttribute('value', this.value);"
+      required=""
+      value="" />
+    <label for="email">Email*</label>
+  </div>
+  <div class="hs-form-field">
+    <input id="phone"
+      name="phone"
+      placeholder=""
+      onchange="this.setAttribute('value', this.value);"
+      type="telephone"
+      value="" />
+    <label for="phone">Phone</label>
+  </div>
+  <div class="hs-form-field">
+    <select id="interest" name="interest" required="">
+      <option value="">
+        Interested in*
+      </option>
+      <option value="chartering">
+        Chartering a yacht
+      </option>
+      <option value="buying">
+        Buying a yacht
+      </option>
+      <option value="press">
+        Press enquiry
+      </option>
+      <option value="general">
+        General enquiry
+      </option>
+    </select>
+  </div>
+  <div class="hs-form-field">
+    <textarea id="message"
+      placeholder=""
+      onchange="this.setAttribute('value', this.value);"
+      name="message"
+      value=""></textarea>
+    <label for="message">Message</label>
+  </div>
+  <div class="contact__form__footer">
+    <div>
+      <div class="hs-form-checkbox">
+        <input id="consent" name="consent" type="checkbox" required />
+        <label for="consent">
+          <p>
+            I consent to my data being used in accordance with the <a href="#">privacy
+              policy</a>
+          </p>
+        </label>
+      </div>
+      <div class="hs-form-checkbox">
+        <input id="marketing" name="marketing" type="checkbox" />
+        <label for="marketing">
+          <p>
+            Please check this box if you consent to receiving marketing
+            communications from us in the future
+          </p>
+        </label>
+      </div>
+    </div>
+    <button type="submit">Send enquiry</button>
+  </div>
+</form>

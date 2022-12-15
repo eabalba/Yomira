@@ -1,0 +1,65 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $TITLE
+ * -----------------------------------------------------------------------------
+ */
+
+.title {
+  margin-bottom: 88px;
+  margin-top: 88px;
+
+  text-align: center;
+
+  @include bp-min-width($bp-sm) {
+    margin-bottom: 120px;
+    margin-top: 120px;
+  }
+
+  @include bp-min-width($bp-md) {
+    margin-bottom: 148px;
+    margin-top: 148px;
+  }
+
+  @include bp-min-width($bp-lg) {
+    margin-bottom: 180px;
+    margin-top: 180px;
+  }
+
+  h2 {
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    line-height: 25px;
+
+    @include bp-min-width($bp-md) {
+      font-size: 25px;
+      letter-spacing: 3.75px;
+      line-height: 35px;
+    }
+  }
+}
+
+.js-enabled {
+  .title__contents > * {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 1s opacity ease, 1s transform ease;
+    will-change: opacity, transform;
+  }
+
+  .title__contents > * {
+    @for $i from 1 through 10 {
+      @include bp-min-width($bp-sm) {
+        &:nth-child(#{$i}) {
+          transition-delay: #{($i * 1) * 0.4}s;
+        }
+      }
+    }
+  }
+
+  .title.inview {
+    .title__contents > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

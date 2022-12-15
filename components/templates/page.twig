@@ -1,0 +1,109 @@
+{% extends 'base.twig' %}
+
+{% set classList = 'post' ~ ' post--' ~ post.post_type %}
+{% if legal %}
+  {% set classList = classList ~ ' post--legal' %}
+{% endif %}
+
+{% block content %}
+  {% if advanced %}
+    {% include 'partial/timeline.twig' %}
+  {% endif %}
+  {% if legal %}
+    <article class="{{ classList }}" id="post-{{ post.ID }}">
+      <h1>
+        {{ post.title }}
+      </h1>
+      {{ post.content }}
+    </article>
+  {% else %}
+    {{ post.content }}
+   {% if post.post_type == 'yacht' %}
+    <!--============ SUGGESTIONS BLOCK =================-->
+<!--{% if Post(post.summer_location) or Post(post.winter_location) %}
+    <div class="container">
+        <h2 class="section-title">Cruising Areas</h2>
+      </div>
+    {% for destination in post.summer_location %}
+        {% set title = destination.title %}
+        {% set link = destination.link %}
+        {% set excerpt = destination.brief_description %}
+        <section  class="block charter-destination-block">
+        
+            <div class="container charter-destination-container ">
+                <img class="charter-destination-image" src="{{ destination.thumbnail.src }}" alt="{{ destination.thumbnail.alt }}"/>
+
+                <div class="charter-destination-textbox">
+                    <div class="section__title">
+                        <h2>{{ title }}</h2>
+                    </div>
+                    <div class="charter-destination-textbox-blurb">
+                        <p>{{ excerpt }}</p>
+                    </div>
+                    <div class="buttons">
+                        {% if destination.children('location') %}<button class="button charterToggle" id="charterToggle-{{ title }}" onclick="showCountries('{{ title }}')"><span class="state">Show</span> countries <i class="arrow down"></i></button>{% endif %}
+                        <a class="button" href="{{ link }}">Discover more <i class="arrow right"></i></a>
+                    </div>
+                </div>  
+            </div>
+            {% if destination.children('location') %}
+                <div class="charter-country-destination-container" id="country-{{ title }}">
+                    <div class="charter-country-slider container ">
+                        {% for child in destination.children('location') %}
+                            <div class="charter-country">
+                                <a href="{{ child.link }}">
+                                    <img  src="{{ child.thumbnail.src }}" alt="{{ child.thumbnail.alt }}">
+                                    <h3 class="charter-country-name">{{ child.title }}</h3>
+                                </a>
+                            </div>
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            {% endif %}
+        </section>
+    {% endfor %}
+
+
+    {% endif %}-->
+     {% if yacht in Post(post.related_yachts)%}
+      <section id="suggestion-block" class="block background-color background-color-grey suggestion-block">
+          <div class="container suggestion-container">
+              <div class="section-title"><h2>Other Suggestions</h2></div>
+              <div class="suggestion-columns suggestions-slider">
+
+                {% for yacht in Post(post.related_yachts)%}
+                  {% if yacht.post_status == 'publish' %}
+                    {% set content = yacht.content %}
+                    {% set title = yacht.title %}
+                    {% set link = yacht.link %}
+                    {% set excerpt = yacht.brief_description %}
+                
+                    <div class="suggestion-column">
+                      <div class="suggestion-column-top">
+                        <img src="{{ yacht.thumbnail.src|resize(600, 400) }}" alt="{{ item.thumbnail.alt }}"/>
+                        <p class="suggestion-title"> {{ title }}</p>
+                        {% if excerpt %}
+                          <p>{{ excerpt }}</p>
+                        {% else %}
+                          {{ content }}
+                        {% endif %}
+                      </div>
+                      <div><a class="button" href="{{ link }}">View</a></div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+                
+
+              </div>
+          </div>
+      </section>
+       {% endif %}
+      
+          
+     
+
+   {% endif %}
+   
+  {% endif %}
+{% endblock %}

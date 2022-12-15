@@ -1,0 +1,268 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $HERO
+ * -----------------------------------------------------------------------------
+ */
+
+.hero {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 88px;
+  min-height: 100vh;
+  position: relative;
+
+  background-color: var(--background_colour);
+  color: var(--white);
+  text-align: center;
+
+  @include bp-min-width($bp-sm) {
+    margin-top: 120px;
+  }
+
+  @include bp-min-width($bp-md) {
+    margin-top: 148px;
+  }
+
+  @include bp-min-width($bp-lg) {
+    margin-top: 180px;
+  }
+
+  &::before,
+  &::after {
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 100px;
+    left: calc(50% - 1px);
+    position: absolute;
+    width: 2px;
+    z-index: 3;
+
+    background-color: var(--white);
+    opacity: 0.25;
+  }
+
+  &::after {
+    animation: 5s ease infinite trickle;
+    opacity: 1;
+    transform: scaleY(0);
+    transform-origin: top center;
+  }
+
+  @keyframes trickle {
+    0% {
+      transform: scaleY(0);
+    }
+    59% {
+      transform: scaleY(1);
+      transform-origin: top center;
+    }
+    60% {
+      transform: scaleY(1);
+      transform-origin: bottom center;
+    }
+    90% {
+      transform: scaleY(0);
+      transform-origin: bottom center;
+    }
+  }
+
+  .lazy-group,
+  img,
+  picture,
+  video {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .lazy-group,
+  img,
+  picture {
+    z-index: 1;
+  }
+
+  video {
+    z-index: 2;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 18px;
+    letter-spacing: 1.8px;
+    line-height: 23px;
+
+    @include bp-min-width($bp-md) {
+      font-size: 25px;
+      letter-spacing: 3.75px;
+      line-height: 35px;
+    }
+
+    @include bp-min-width($bp-xxl) {
+      font-size: 40px;
+      letter-spacing: 3.2px;
+      line-height: 50px;
+    }
+  }
+
+  h1:first-child {
+    @include bp-min-width($bp-md) {
+      font-size: 60px;
+      letter-spacing: 3.2px;
+      line-height: 1.2;
+    }
+
+    @include bp-min-width($bp-xxl) {
+      font-size: 80px;
+      letter-spacing: 3.2px;
+      line-height: 1.2;
+    }
+  }
+
+  .hero__sticky + .container h2,
+  h1 ~ h2 {
+    @include bp-min-width($bp-xxl) {
+      font-size: 32px;
+      letter-spacing: 3.2px;
+      line-height: 42px;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+
+    color: var(--white);
+
+    @include bp-min-width($bp-xxl) {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    a {
+      text-decoration: underline;
+
+      @include active-states() {
+        text-decoration: none;
+      }
+    }
+  }
+
+  > * {
+    max-width: 100%;
+  }
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.hero__tint {
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+
+  background-color: var(--black);
+  opacity: var(--tint);
+}
+
+.hero__contents {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1400px;
+  position: relative;
+  z-index: 3;
+
+  opacity: 1;
+  transform: translateY(0px);
+  transition: 0.8s opacity ease, 0.8s transform ease;
+  will-change: opacity, transform;
+}
+
+.hero__sticky {
+  margin: 0 auto;
+  margin-bottom: 48px;
+  max-width: 260px;
+  position: sticky;
+  top: 32px;
+  top: var(--header-logo-offset);
+  width: 100%;
+  z-index: 99;
+
+  opacity: 1;
+  transition: 1s max-width ease, 0.4s opacity ease 0.7s;
+  will-change: max-width, opacity;
+
+  color: var(--black);
+
+  @include bp-min-width($bp-xxl) {
+    max-width: 360px;
+  }
+
+  @include bp-min-width($bp-xxxl) {
+    max-width: 540px;
+  }
+
+  svg {
+    width: 100%;
+
+    fill: currentColor;
+  }
+}
+
+.body--scrolled {
+  .hero__contents {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  .hero__sticky {
+    max-width: 100px;
+
+    @include bp-min-width($bp-md) {
+      max-width: 160px;
+    }
+  }
+}
+
+.body--open,
+.body--hero-sticky-swap {
+  .hero__sticky {
+    opacity: 0;
+    pointer-events: none;
+    transition: 1s max-width ease, 0.4s opacity ease;
+    will-change: max-width, opacity;
+  }
+}
+
+.section--light {
+  .hero__sticky {
+    color: var(--white);
+  }
+}

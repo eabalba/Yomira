@@ -1,0 +1,312 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $CAROUSEL
+ * -----------------------------------------------------------------------------
+ */
+
+.carousel {
+  // Offset for slick dots (+40px)
+  margin-bottom: 128px;
+  overflow: hidden;
+  padding-top: 88px;
+
+  background: linear-gradient(
+    180deg,
+    #0f1426 0%,
+    #223457 20%,
+    #5f83a3 46%,
+    #bcd3dc 67%,
+    #ffffff 100%
+  );
+
+  @include bp-min-width($bp-sm) {
+    margin-bottom: 160px;
+    padding-top: 120px;
+  }
+
+  @include bp-min-width($bp-md) {
+    margin-bottom: 188px;
+    padding-top: 148px;
+  }
+
+  @include bp-min-width($bp-lg) {
+    margin-bottom: 220px;
+    padding-top: 180px;
+  }
+
+  .slick-arrow {
+    bottom: calc(var(--media-height) / 2);
+    top: auto;
+  }
+
+  .slick-prev {
+    transform: translateY(50%);
+
+    @include bp-min-width($bp-lg) {
+      left: 1.5%;
+    }
+  }
+
+  .slick-next {
+    transform: translateY(50%) rotate(180deg);
+
+    @include bp-min-width($bp-lg) {
+      right: 1.5%;
+    }
+  }
+
+  .slick-list {
+    padding: 0 30px;
+
+    @include bp-min-width($bp-lg) {
+      padding: 0 150px;
+    }
+  }
+}
+
+.carousel__cta {
+  margin-top: 80px;
+
+  text-align: center;
+
+  a {
+    text-transform: initial;
+  }
+}
+
+.carousel__slider {
+  @include bp-max-width(3000px) {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+  }
+
+  /* the slides */
+  .slick-slide {
+    height: inherit !important;
+    margin: 0 10px;
+
+    @include bp-min-width($bp-lg) {
+      margin: 0 30px;
+    }
+  }
+
+  /* the parent */
+  .slick-list {
+    margin: 0 -10px;
+
+    @include bp-min-width($bp-lg) {
+      margin: 0 -30px;
+    }
+  }
+
+  .slick-track {
+    align-items: flex-end;
+    display: flex !important;
+  }
+}
+
+.carousel__item {
+  position: relative;
+
+  a,
+  img,
+  picture,
+  video {
+    outline: none;
+  }
+
+  h2,
+  h3 {
+    margin: 0;
+    margin-bottom: 8px;
+
+    z-index: 4;
+  }
+
+  h2 {
+    @include bp-min-width($bp-lg) {
+      margin-bottom: 0;
+    }
+  }
+
+  h3 {
+    font-size: 30px;
+    letter-spacing: 3.75px;
+    line-height: 1.5;
+    pointer-events: none;
+    text-transform: uppercase;
+
+    @include bp-min-width($bp-lg) {
+      font-size: 60px;
+      letter-spacing: 6px;
+      line-height: 68px;
+    }
+
+    @include bp-min-width($bp-lg) {
+      bottom: 0;
+      left: 0;
+      max-width: 768px;
+      padding: 0 40px;
+      position: absolute;
+      transform: translateY(--media-height);
+    }
+
+    @include bp-min-width($bp-xl) {
+      padding: 0 64px;
+    }
+
+    @include bp-min-width($bp-xxl) {
+      padding: 0 80px;
+    }
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.carousel__item__media {
+  display: block;
+  height: 0;
+  padding-top: 90%;
+  position: relative;
+  width: 100%;
+
+  @include bp-min-width($bp-md) {
+    // 55.9210526316 as per design but
+    padding-top: 55.9%;
+  }
+
+  @include bp-min-width($bp-lg) {
+    height: 550px;
+    padding-top: 0;
+  }
+
+  @include bp-min-width($bp-xxl) {
+    height: 650px;
+  }
+
+  @include bp-min-width($bp-xxxl) {
+    height: 850px;
+  }
+
+  .lazy-group,
+  a,
+  img,
+  picture,
+  video {
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .lazy-group,
+  img,
+  picture,
+  video {
+    z-index: 1;
+
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.5;
+    transition: 0.8s opacity ease;
+    will-change: opacity;
+
+    @include bp-min-width($bp-lg) {
+      transform: scale(1, 0.85);
+      transition: 0.8s opacity ease, 0.8s transform ease;
+      will-change: opacity transform;
+    }
+  }
+
+  .lazy-group .lazy__tiny {
+    transform: scale(1);
+  }
+}
+
+.carousel__item__text {
+  margin-bottom: 32px;
+
+  color: var(--white);
+
+  @include bp-min-width($bp-lg) {
+    margin-bottom: 24px;
+  }
+
+  > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.8s opacity ease, 0.8s transform ease;
+    will-change: opacity transform;
+
+    @for $i from 1 through 4 {
+      &:nth-child(#{$i}) {
+        transition-delay: #{$i * 0.2}s;
+      }
+    }
+  }
+
+  @include bp-min-width($bp-lg) {
+    > h3 {
+      transform: translateY(
+        calc(((var(--media-height) / 2) * -1) + 50% + 40px)
+      );
+    }
+  }
+}
+
+.slick-active {
+  outline: none;
+
+  .carousel__item__media {
+    overflow: hidden;
+
+    .lazy-group,
+    img,
+    picture,
+    video {
+      opacity: 1;
+
+      @include bp-min-width($bp-lg) {
+        transform: scale(1);
+        transition: 0.8s opacity ease, 2s transform ease;
+        will-change: opacity transform;
+      }
+    }
+  }
+
+  .lazy-group,
+  img,
+  picture,
+  video {
+    transition: 0.8s opacity ease, 2s transform ease;
+    will-change: opacity transform;
+  }
+
+  @include active-states() {
+    img,
+    picture,
+    video {
+      @include bp-min-width($bp-lg) {
+        transform: scale(1.025);
+      }
+    }
+  }
+
+  .carousel__item__text {
+    > * {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+
+    @include bp-min-width($bp-lg) {
+      > h3 {
+        transform: translateY(calc(((var(--media-height) / 2) * -1) + 50%));
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{% set pagination = posts.pagination %}
+{% set pagination_pages = posts.pagination.pages %}
+{% set allow_next = pagination.next %}
+{% set allow_prev = pagination.prev %}
+
+{% set dots = false %}
+
+{% for page in pagination_pages %}
+  {% if 'dots' in page.class %}
+    {% set dots = true %}
+  {% endif %}
+{% endfor %}
+
+{% set cur = pagination.current %}
+
+{% set parent_classList = 'pagination' %}
+{% if dots %}
+  {% set parent_classList = parent_classList ~ ' pagination--dots' %}
+{% endif %}
+
+{% if pagination_pages is not empty %}
+  <nav class="{{ parent_classList }}" role="navigation" aria-label="pagination">
+    {% if allow_prev %}
+      <a class="pagination__previous" href="{{ pagination.prev.link }}">
+        {% include 'icons/arrow-sharp-left.twig' %}
+        <span class="hide">Previous</span>
+      </a>
+    {% else %}
+      <a class="pagination__previous" disabled>
+        {% include 'icons/arrow-sharp-left.twig' %}
+        <span class="hide">Previous</span>
+      </a>
+    {% endif %}
+
+    {% for page in pagination_pages %}
+      {% set classList = 'pagination__link' %}
+      {% set i = loop.index %}
+
+      {% if i == cur - 1 %}
+        {% set classList = classList ~ ' pagination__link--previous' %}
+      {% endif %}
+
+      {% if i == cur + 1 %}
+        {% set classList = classList ~ ' pagination__link--next' %}
+      {% endif %}
+
+      {% if i == cur %}
+        {% set classList = classList ~ ' pagination__link--current' %}
+      {% endif %}
+
+      {% if cur == 1 and i == 3 %}
+        {% set classList = classList ~ ' pagination__link--next' %}
+      {% endif %}
+
+      {% if page.link %}
+        <a href="{{ page.link }}" class="{{ classList }} {{ page.class }}">
+          {{ page.title }}
+        </a>
+      {% else %}
+        <a class="{{ classList }} {{ page.class }}">{{ page.title }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if allow_next %}
+      <a class="pagination__next" href="{{ pagination.next.link }}">
+        {% include 'icons/arrow-sharp-right.twig' %}
+        <span class="hide">Next</span>
+      </a>
+    {% else %}
+      <a class="pagination__next" disabled>
+        {% include 'icons/arrow-sharp-right.twig' %}
+        <span class="hide">Next</span>
+      </a>
+    {% endif %}
+  </nav>
+{% endif %}

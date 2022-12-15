@@ -1,0 +1,52 @@
+{% set body_class = body_class ~ " body--light" %}
+
+{% if cookies_determined == null %}
+	{% set body_class = body_class ~ " body--cookies" %}
+{% endif %}
+
+{% block html_head_container %}
+	{% include 'html-header.twig' %}
+	{% block head %}{% endblock %}
+	</head>
+{% endblock %}
+	<body class="{{body_class}} page--{{post.slug}}" data-template="base.twig">
+		{% include 'partial/cookies.twig' %}
+		{% block header %}
+			{% include 'header.twig' %}
+		{% endblock %}
+		<main id="content" role="main" class="content-wrapper">
+		  {% include 'blocks/hero.twig' with {
+        fields: {
+          className: 'hero',
+          content: options.notfound_content,
+          media: options.notfound_hero_image
+        }
+      } %}
+      {% if options.notfound_suggested_items %}
+      <section class="posts">
+        {% if options.notfound_suggested_title %}
+          <h2 class="h3" id="{{ slugify(options.notfound_suggested_title) }}">
+            {{options.notfound_suggested_title}}
+          </h2>
+        {% endif %}
+        <section class="grid">
+          <div class="grid__contents">
+            {% for item in Post(options.notfound_suggested_items) %}
+              {% include 'partial/item.twig' with {
+                post: item,
+                size: 3
+              } %}
+            {% endfor %}
+          </div>
+        </section>
+      </section>
+      {% endif %}
+		</main>
+		{% block footer %}
+			{% include 'footer.twig' %}
+		{% endblock %}
+    {% include 'partial/cursor.twig' %}
+		{{ function('wp_footer') }}
+    {% include 'partial/tracking.twig' %}
+	</body>
+</html>

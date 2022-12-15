@@ -1,0 +1,24 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $ANCHOR
+ * -----------------------------------------------------------------------------
+ */
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: 0.2s color ease;
+  will-change: color, underline;
+
+  @include active-states() {
+    color: inherit;
+    text-decoration: underline;
+  }
+}
+
+article a {
+  @include active-states() {
+    color: var(--blue);
+    text-decoration: underline;
+  }
+}

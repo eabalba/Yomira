@@ -1,0 +1,32 @@
+{% set ajax = ajax|default(false) %}
+{% set ID = post.ID|default(ID) %}
+{% set post_type = post.post_type|default('post') %}
+{% set classList = 'item item--standard item--' ~ post_type %}
+{% set size = size|default(2) %}
+
+{% set image_src = post.thumbnail.src|resize(600, 420) %}
+
+<div class="{{ classList }}"
+  id="item-{{ ID }}"
+  data-tags="{{ post.tags|join(', ') }}">
+  {% block content %}
+    <div class="item__media">
+      <a href="{{ post.link }}">
+        {% if post.get_thumbnail %}
+          <img src="{{ image_src }}" />
+        {% else %}
+          {% include 'partial/placeholder.twig' %}
+        {% endif %}
+      </a>
+    </div>
+    <div class="item__content">
+      <time class="item__date">{{ post.date|date('d.m.yy') }}</time>
+      <h{{size}} class="item__title">
+        <a href="{{ post.link }}">{{ post.title }}</a>
+      </h{{size}}>
+      <p class="item__description">
+        {{ post._yoast_wpseo_metadesc }}
+      </p>
+    </div>
+  {% endblock %}
+</div>

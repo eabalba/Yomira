@@ -1,0 +1,120 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $CHECKBOX
+ * -----------------------------------------------------------------------------
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+
+  border: 0;
+  border-radius: initial;
+  display: initial;
+  min-height: 1px;
+  background-color: initial;
+  color: inherit;
+  line-height: inherit;
+  transition: none;
+
+  & ~ & {
+    + label {
+      margin-top: 12px;
+    }
+  }
+
+  & + label {
+    display: inline-block;
+    padding-left: 40px;
+    position: relative;
+
+    font-weight: 400;
+
+    &::after,
+    &::before {
+      border-radius: 50%;
+      content: "";
+      display: inline-block;
+      left: 0;
+      position: absolute;
+      top: 0;
+      flex-shrink: 0;
+      height: 24px;
+      left: 0;
+      margin-right: 2px;
+      top: 0;
+      width: 24px;
+
+      background-color: transparent;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 35%;
+      color: white;
+      opacity: 0;
+      outline-offset: 2px;
+      transition: 0.2s opacity ease;
+      will-change: opacity;
+
+      @include bp-min-width($bp-xs) {
+        margin-right: 0;
+      }
+    }
+
+    &::after {
+      border: 1px solid var(--black);
+      opacity: 1;
+    }
+
+    &:focus,
+    &:focus-within {
+      &::before {
+        outline: 1px dotted var(--black);
+      }
+    }
+  }
+}
+
+input[type="checkbox"] {
+  &:checked {
+    & + label {
+      &::before {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20.102' height='20.102' viewBox='0 0 20.102 20.102'%3E%3Cpath id='Path_43' data-name='Path 43' d='M588.182-631.949A10.051,10.051,0,0,1,578.131-621.9a10.051,10.051,0,0,1-10.051-10.051A10.051,10.051,0,0,1,578.131-642,10.051,10.051,0,0,1,588.182-631.949Zm-6.277-3.386-5.037,5.037-2.51-2.51a1.071,1.071,0,0,0-1.514,0h0a1.071,1.071,0,0,0,0,1.514l3.332,3.332a.979.979,0,0,0,1.385,0l5.859-5.859a1.071,1.071,0,0,0,0-1.514h0A1.071,1.071,0,0,0,581.9-635.335Z' transform='translate(-568.08 642)' fill='%231d253e'/%3E%3C/svg%3E%0A");
+        background-size: 100%;
+      }
+    }
+  }
+
+  &:focus-visible {
+    & + label {
+      &::before {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20.102' height='20.102' viewBox='0 0 20.102 20.102'%3E%3Cpath id='Path_43' data-name='Path 43' d='M588.182-631.949A10.051,10.051,0,0,1,578.131-621.9a10.051,10.051,0,0,1-10.051-10.051A10.051,10.051,0,0,1,578.131-642,10.051,10.051,0,0,1,588.182-631.949Zm-6.277-3.386-5.037,5.037-2.51-2.51a1.071,1.071,0,0,0-1.514,0h0a1.071,1.071,0,0,0,0,1.514l3.332,3.332a.979.979,0,0,0,1.385,0l5.859-5.859a1.071,1.071,0,0,0,0-1.514h0A1.071,1.071,0,0,0,581.9-635.335Z' transform='translate(-568.08 642)' fill='%231d253e'/%3E%3C/svg%3E%0A");
+        background-size: 100%;
+      }
+    }
+  }
+
+  &:checked {
+    & + label {
+      &::after,
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &:active,
+    &:focus {
+      & + label {
+        &::after,
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{% set align = fields.align|default('center') %}
+{% set link = fields.link %}
+
+{% if link %}
+  <section id="{{ id }}" class="block--button align--{{ align }}">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="button__contents">
+            {% include 'partial/button.twig' with {
+              class: 'button--solid',
+              href: link.url,
+              target: link.target,
+              title: link.title
+            } %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}

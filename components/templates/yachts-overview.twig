@@ -1,0 +1,92 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+  {{  overview.content}}
+   
+    <div class="filter-row background-color background-color-grey contact">
+        <div class="container contact__form">
+             <div class="filter-option hs-form-field season">
+                <label for="season">Charter Season</label>
+                <select id="season" class="filter-select filter">
+                    <option value="any">Any</option>
+                    <option value="winter">Winter</option>
+                    <option value="summer">Summer</option>
+                </select>
+             
+            </div>
+             <div class="filter-option hs-form-field location">
+                <label for="location">Where would you like to cruise</label>
+                <select id="location" class="filter-select filter">
+                    <option value="any">Anywhere</option>
+                    {% for location in locations %}
+                        {% set title = location.title %}
+                        <option value="{{ location }} ">{{ title }}</option>
+                    {% endfor %}
+                </select>
+             
+            </div>
+        </div>
+    </div>
+
+<section id="suggestion-block" class="yacht-select block  suggestion-block ">
+    <div class="container suggestion-container ">
+     <div class="sort hs-form-field ">
+        <label for="sort">Sort by:</label>
+
+        <select  id="sort">
+            <option disabled selected value><i>Select an option</i></option>
+            <option value="price" data-order="desc">Price per week (high to low)</option>
+            <option value="price" data-order="asc">Price per week (low to high)</option>
+            <option value="length" data-order="desc">Length (high to low)</option>
+            <option value="length" data-order="asc">Length (low to high)</option>
+        </select>
+    </div>
+
+        <div class="suggestion-grid yacht-list">
+         {% for yacht in yachts %}
+            {% if yacht.post_status == 'publish' %}
+            {% set post_type = yacht.post_type %}
+
+                {% set content = yacht.content %}
+                {% set title = yacht.title %}
+                {% set link = yacht.link %}
+                {% set excerpt = yacht.brief_description %}
+                {% set price_eur = yacht.price_eur %}
+                {% set length_m = yacht.length_m %}
+                {% set summer_location = yacht.summer_location %}
+                {% set winter_location = yacht.winter_location %}
+
+            
+                <div class="suggestion-column yacht " 
+                data-price="{{ price_eur }}" 
+                data-length="{{ length_m }}" 
+                data-summer="{% for location in Post(yacht.summer_location) %}
+                    {{ location.title }} {% endfor %}"
+                data-winter="{% for location in Post(yacht.winter_location) %}
+                    {{ location.title }} {% endfor %}"
+                > 
+                    <div class="suggestion-column-top">
+                        <img src="{{ yacht.thumbnail.src|resize(900, 500) }}" alt="{{ yacht.thumbnail.alt }}"/>
+                        <p class="suggestion-title"> {{ title }}</p>
+                        {% if excerpt %}
+                            <p>{{ excerpt }}</p>
+                        {% else %}
+                            {{ content }}
+                        {% endif %}
+                    </div>
+                    <div>
+                        <a class="button" href="{{ link }}">View</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}
+
+

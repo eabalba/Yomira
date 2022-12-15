@@ -1,0 +1,34 @@
+ <!--============ CAPTAINS VLOG BLOCK =================-->
+ <section class="block captains-vlog-block">
+    <div class="container captains-vlog-container">
+        <div class="vlog-media-column">
+            <div class="captains-vlog-video">
+                {% set mediatype = fields.media_type %}
+                {% if mediatype == 'image' %}
+                {% set image = TimberImage(fields.media_image) %}
+                    <img src="{{ image.src }}" class="lazy"  alt="{{ image.alt }}" />
+                {% else %}
+                    <video controls autoplay muted>
+                        <source type="video/mp4" src="{{ fields.media_video }}" >
+                        Your browser is unable to play videos.
+                    </video>
+                {% endif %}
+            </div>
+            {% if fields.content_under_media %}
+                <div class="captains-vlog-quote blockquote">
+                {{ fields.content_under_media }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="vlog-content-column">
+            {% if fields.media_heading %}
+                <div class="section-title">
+                {{ fields.media_heading }}
+                </div>
+            {% endif %}
+            <div class="vlog-content">
+                {{ fields.media_text_main_content }}
+            </div>
+        </div>
+    </div> 
+</section>

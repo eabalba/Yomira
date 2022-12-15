@@ -1,0 +1,77 @@
+{% set gallery = fields.yacht_overview_gallery %}
+{% set counter = 0 %}
+{% for gallery_item in gallery %}
+    {% set counter = counter + 1 %}
+{% endfor %}
+<section id="overview-block" class="block overview-block background-color background-color-{{ fields.background_colour }}">
+    <div class="container gallery-and-text overview-container {% if fields.text_only == true %}text-only{% endif %}{% if counter == 1 %}single-media-and-text {% endif %} {{ fields.layout }}">
+        <div class="gallery-column overview-gallery">
+             {% if counter > 1 %}<div class="slider-for">{% endif %}
+                {% for gallery_item in gallery %}
+                    {% set type = gallery_item.type %}
+                    {% set image = TimberImage(gallery_item.image) %}
+                    {% set video = gallery_item.video %}
+                    {% set alt = image.alt %}
+                    {% set largest = image.src|resize(1366, 900) %}
+                    {% set medium = image.src|resize(960, 800) %}
+                    {% set smallest = image.src|resize(700, 550) %}
+                    {% set small = image.src|resize(450, 400) %}
+                    {% set tiny = image.src|resize(10, 10) %}
+
+                    {% if type == 'image' %}
+                    {% if gallery_item.image %}
+                        <div><picture>
+                            <img src="{{ tiny }}" class="lazy" data-src="{{ largest }}" alt="{{ alt }}" />
+                            <source data-srcset="{{ largest }}"
+                            media="(min-width: 960px)" />
+                            <source data-srcset="{{ medium }}"
+                            media="(min-width: 700px)" />
+                            <source data-srcset="{{ smallest }}"
+                            media="(min-width: 450px)" />
+                            <source data-srcset="{{ small }}"
+                            media="(min-width: 1px)" />
+                        </picture></div>
+                    {% endif %}
+                    {% endif %}
+
+                    {% if type == 'video' %}
+                    {% if gallery_item.video and gallery_item.image %}
+                    <div>
+                         <video muted loop>
+                        <source type="video/mp4" src="{{ video }}" >
+                        Your browser is unable to play videos.
+                    </video>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
+             {% if counter > 1 %}</div> {% endif %}
+            {% if counter > 1 %}
+                <div class="slider-nav">
+                    {% for gallery_item in gallery %}
+                        {% set image = TimberImage(gallery_item.image) %}
+                        {% set alt = image.alt %}
+                        {% set thumb = image.src|resize(700,700) %}
+                        {% set type = gallery_item.type %}
+                        {% if gallery_item.image %}
+                            <div {% if type == 'video' %} class="video-thumb" {% endif %}>
+                                <img src="{{ thumb }}" class="lazy"  alt="{{ alt }}" />
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div> 
+            {% endif %}
+            
+                        
+        </div>
+        <div class="text-column overview-information">
+            {{ fields.yacht_overview }}
+            {% if fields.yacht_overview_cta %}
+
+                    {% set cta = fields.yacht_overview_cta %}
+                    <a href="{{ cta.url }}" class="button">{{ cta.title }}</a>
+                
+            {% endif %}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,27 @@
+<!--============ OPERATION BLOCK =================-->
+{% set bannerbg = fields.background_color %}
+{% set bannertext = fields.main_text_colour %}
+{% set cardbg = fields.card_background %}
+{% set cardtext = fields.card_text_color %}
+<section id="" class="block background-color background-color-blueDark operation-block" style="{% if bannerbg %} background-color: {{ bannerbg }}; {% endif %} {% if fields.background_image %} background-image: url(' {{ fields.background_image }} '); {% endif %} ">
+    <div class="container">
+        <div class="operation-container" style="{% if bannertext %} border: 2px solid {{ bannertext }}; {% endif %}" >
+            <div class="operation-content" style="{% if bannertext %} color:  {{ bannertext }}; {% endif %}">
+                {{ fields.panel_banner_content }}
+            </div>
+            {% set cards = fields.cards %}
+            {% if cards %}     
+                <div class="operation-boxes"  >
+                    {% for card in cards %}
+                        <div class="operation-box" style="{% if cardbg %} background-color: {{ cardbg }} {% endif %} ">
+                            <div class="operation-border" style="{% if cardtext %} border: 2px solid {{ cardtext }}; color: {{ cardtext }};{% endif %} ">
+                            {{ card.card_content }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div> 
+            {% endif %}
+        </div>
+    </div>
+        
+</section>

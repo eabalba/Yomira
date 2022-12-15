@@ -1,0 +1,186 @@
+{% set items = fields.yachts|default(items) %}
+{% set count = items|length %}
+{% set reversed = fields.reversed|default(reversed) %}
+{% set title = fields.title|default(title) %}
+
+{% if reversed %}
+  {% set className = className ~ ' gallery--reversed' %}
+{% endif %}
+
+{% if items %}
+  <section id="{{ id }}" class="{{ className }}">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="gallery__contents">
+            <div class="gallery__popups">
+              {% for item in TimberPost(items) %}
+                {% set index = loop.index %}
+                {% set gallery = item.meta('gallery') %}
+
+                {% set videoAttrs = 'controls playsinline' %}
+
+                {% if (gallery|length) > 0 %}
+                  <div class="gallery__popup"
+                    aria-hidden="true"
+                    data-sync-index="{{ id ~ '-' ~ index }}">
+                    <div class="gallery__popup__top">
+                      <button class="gallery__popup__close">
+                        {% include 'components/icons/times-alt.twig' %}
+                      </button>
+                    </div>
+                    <div class="gallery__popup__contents">
+                      <div class="gallery__popup__wrapper">
+                        <div class="gallery__popup__inner">
+                          {% for gallery_item in gallery %}
+                            {% set type = gallery_item.type %}
+                            {% set image = TimberImage(gallery_item.image) %}
+                            {% set video = gallery_item.video %}
+
+                            {% set alt = image.alt %}
+                            {% set largest = image.src|resize(1366, 768) %}
+                            {% set medium = image.src|resize(960, 648) %}
+                            {% set smallest = image.src|resize(700, 473) %}
+                            {% set small = image.src|resize(450, 304) %}
+                            {% set tiny = image.src|resize(10, 10) %}
+
+                            {% if type == 'image' %}
+                              <picture>
+                                <img src="{{ tiny }}" class="lazy" data-src="{{ largest }}" alt="{{ alt }}" />
+                                <source data-srcset="{{ largest }}"
+                                  media="(min-width: 960px)" />
+                                <source data-srcset="{{ medium }}"
+                                  media="(min-width: 700px)" />
+                                <source data-srcset="{{ smallest }}"
+                                  media="(min-width: 450px)" />
+                                <source data-srcset="{{ small }}"
+                                  media="(min-width: 1px)" />
+                              </picture>
+                            {% endif %}
+
+                            {% if type == 'video' %}
+                              <div>
+                                <video class="lazy" data-src="{{ video }}"  {{ videoAttrs }}>
+                                  <source data-src="{{ video }}" type="video/mp4" />Sorry, your browser doesn't
+                                  support embedded videos.
+                                </video>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="gallery__sliders">
+              {% set i = 0 %}
+              {% for item in TimberPost(items) %}
+                {% set className = 'gallery__slider' %}
+                {% set indexSlider = loop.index %}
+                {% set gallery = item.meta('gallery') %}
+
+                {% set sliderItemCount = gallery|length %}
+
+                {% if sliderItemCount > 1 %}
+                  {% set className = className ~ ' gallery__slider--multi' %}
+                {% endif %}
+
+                {% if indexSlider > 1 %}
+                  {% set className = className ~ ' gallery__slider--hide' %}
+                {% endif %}
+
+                <div class="{{ className }}"
+                  data-sync-index="{{ id ~ '-' ~ indexSlider }}">
+                  {% for gallery_item in gallery %}
+                    {% set indexSlide = loop.index %}
+
+                    {% set videoAttrs = 'loop muted playsinline' %}
+                    {% if indexSlide == 1 %}
+                      {% set videoAttrs = videoAttrs ~ ' autoplay' %}
+                    {% endif %}
+
+                    {% set type = gallery_item.type %}
+                    {% set image = TimberImage(gallery_item.image) %}
+                    {% set video = gallery_item.video %}
+
+                    <button class="gallery__media"
+                      data-popup-position="{{ indexSlide - 1 }}">
+                      {% if type == 'image' %}
+                        {% set alt = image.alt %}
+                        {% set largest = image.src|resize(1600, 1080) %}
+                        {% set medium = image.src|resize(960, 648) %}
+                        {% set smallest = image.src|resize(700, 473) %}
+                        {% set small = image.src|resize(450, 304) %}
+                        {% set tiny = image.src|resize(10, 10) %}
+
+                        {% if preview %}
+                          {% set tiny = largest %}
+                        {% endif %}
+
+                        <picture>
+                          <img src="{{ tiny }}" class="lazy" data-src="{{ largest }}" alt="{{ alt }}" />
+                          <source data-srcset="{{ largest }}"
+                            media="(min-width: 960px)" />
+                          <source data-srcset="{{ medium }}"
+                            media="(min-width: 700px)" />
+                          <source data-srcset="{{ smallest }}"
+                            media="(min-width: 450px)" />
+                          <source data-srcset="{{ small }}"
+                            media="(min-width: 1px)" />
+                        </picture>
+                      {% endif %}
+
+                      {% if type == 'video' %}
+                        <video class="lazy" data-src="{{ video }}"  {{ videoAttrs }}>
+                          <source data-src="{{ video }}" type="video/mp4" />Sorry, your browser doesn't
+                          support embedded videos.
+                        </video>
+                      {% endif %}
+                    </button>
+                  {% endfor %}
+                </div>
+                {% set i = i + 1 %}
+              {% endfor %}
+            </div>
+            <div class="gallery__text">
+              <h2 class="h3" id="{{ slugify(title) }}">
+                {{ title }}
+              </h2>
+
+              {% for item in TimberPost(items) %}
+                {% set itemIndex = loop.index %}
+                {% set content = item.content %}
+                {% set title = item.title %}
+                {% set excerpt = item.brief_description %}
+
+                {% set classList = 'gallery__item gallery__item--hide' %}
+                {% if itemIndex == 1 %}
+                  {% set classList = 'gallery__item' %}
+                {% endif %}
+
+                <div class="{{ classList }}"
+                  data-sync-index="{{ id ~ '-' ~ itemIndex }}">
+                  <button class="gallery__item__toggle">
+                    <h3 class="h2" id="{{ slugify(title) }}">
+                      {{ title }}
+                    </h3>
+                  </button>
+                  <div class="gallery__item__text">
+                   {% if excerpt %}
+                    {{ excerpt }}
+                    {% else %}
+
+                    {{ content }}
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}

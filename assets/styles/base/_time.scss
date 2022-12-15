@@ -1,0 +1,26 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $TIME
+ * -----------------------------------------------------------------------------
+ */
+
+time {
+  display: block;
+  margin: 0;
+
+  text-align: left;
+  font-weight: var(--weightLight);
+  font-size: 15px;
+  line-height: 18px;
+
+  @include bp-min-width($bp-md) {
+    font-size: 17px;
+    letter-spacing: 0px;
+    line-height: 20px;
+  }
+
+  @include bp-min-width($bp-xxxl) {
+    font-size: 22px;
+    line-height: 1.5;
+  }
+}

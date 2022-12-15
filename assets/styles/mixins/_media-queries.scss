@@ -1,0 +1,45 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $MEDIA-QUERIES
+ * -----------------------------------------------------------------------------
+ */
+
+/**
+ * Mixins for defining media queries. These mixins should always be used
+ * to define media query breakpoints.
+ */
+
+@mixin bp-min-width($width) {
+  @media all and (min-width: $width) {
+    @content;
+  }
+}
+
+/**
+ * Only use in rare circumstances, favour `bp-min-width`.
+ */
+@mixin bp-max-width($width) {
+  @media all and (max-width: $width) {
+    @content;
+  }
+}
+
+/**
+ * Mixins for defining media queries. These mixins should always be used
+ * to define media query breakpoints.
+ */
+
+@mixin bp-min-height($height) {
+  @media all and (min-height: $height) {
+    @content;
+  }
+}
+
+/**
+ * Only use in rare circumstances, favour `bp-min-height`.
+ */
+@mixin bp-max-height($height) {
+  @media all and (max-height: $height) {
+    @content;
+  }
+}

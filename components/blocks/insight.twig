@@ -1,0 +1,34 @@
+<!--============ INSIGHT BLOCK =================-->
+<section id="insight-block" class="block insight-block background-color background-color-bluebright">
+    <div class="container insight-container">
+        {% if  fields.insight_heading %}
+            <div class="section-title">{{ fields.insight_heading }}</div>
+         {% endif %}
+
+        <div class="insight-founder-container">
+            <div class="insight-founder-info">
+                {% set image = TimberImage(fields.insight_image) %}
+                {% if  image  %}
+                    <img src="{{ image.src }}" class="lazy"  alt="{{ image.alt }}" />
+                {% endif %}
+                <div class="insight-founder-heading">
+                    {% if  fields.insight_citation_name  %}
+                    <p class="founder-name"><strong>{{ fields.insight_citation_name }}</strong></p>
+                    {% endif %}
+                    {% if fields.insight_citation_job_title %}
+                    <p class="founder-title">{{ fields.insight_citation_job_title }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="insight-founder-quote-container">
+                {{ fields.insight_content }}
+            </div>
+        </div>
+        {% if fields.insight_citation_job_title %}
+            <div class="align-right button-link">
+                {% set cta = fields.insight_cta %}
+                <a href="{{ cta.url }}"><p>{{ cta.title }}</p></a>
+            </div>
+         {% endif %}
+    </div>
+</section>

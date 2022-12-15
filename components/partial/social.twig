@@ -1,0 +1,24 @@
+{% set url = url|default(post.link) %}
+
+<div class="social__wrap">
+  <nav class="social">
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ url|url_encode }}"
+      target="_blank"
+      rel="noopener noreferrer">
+      {% include 'icons/brands/facebook-alt.twig' %}
+      <span class="hide">Facebook</span>
+    </a>
+    <a href="https://twitter.com/intent/tweet?text={{ url|url_encode }}"
+      target="_blank"
+      rel="noopener noreferrer">
+      {% include 'icons/brands/twitter-alt.twig' %}
+      <span class="hide">Twitter</span>
+    </a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ url|url_encode }}"
+      target="_blank"
+      rel="noopener noreferrer">
+      {% include 'icons/brands/linkedin-alt.twig' %}
+      <span class="hide">LinkedIn</span>
+    </a>
+  </nav>
+</div>

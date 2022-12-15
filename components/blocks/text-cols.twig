@@ -1,0 +1,21 @@
+
+ <section class="block text-cols--block background-color background-color-{{ fields.background_colour }} {{ className }}">
+    <div class="container text-cols--container">
+        <div class="text-cols-content-column {{ fields.layout }}">
+            {% if fields.text_cols_heading %}
+                <div class="section-title">
+                {{ fields.text_cols_heading }}
+                </div>
+            {% endif %}
+            <div class="text-cols-content">
+                {{ fields.text_cols_main_content }}
+            </div>
+        </div>
+        {% if fields.cta %}
+            <div class="align-right button-link" style="margin-top: 20px">
+                {% set cta = fields.cta %}
+                <a href="{{ cta.url }}"><p><strong>{{ cta.title }}</strong></p></a>
+            </div>
+        {% endif %}
+    </div> 
+</section>

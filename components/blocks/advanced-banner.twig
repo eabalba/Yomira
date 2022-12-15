@@ -1,0 +1,15 @@
+{% set image = TimberImage(fields.image) %}
+
+{% if image %}
+  <section id="{{ id }}" class="{{ className }}">
+    <picture>
+      <source srcset="{{ image.src|resize(1100, 500) }}"
+        media="(min-width: 960px)" />
+      <source srcset="{{ image.src|resize(960, 700) }}"
+        media="(min-width: 700px)" />
+      <source srcset="{{ image.src|resize(700, 700) }}"
+        media="(min-width: 450px)" />
+      <img src="{{ image.src|resize(1100, 500) }}" alt="{{ image.alt }}" />
+    </picture>
+  </section>
+{% endif %}

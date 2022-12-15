@@ -1,0 +1,16 @@
+<nav class="filters">
+  <span class="button">Filter By</span>
+  <button class="filters__toggle">
+    Filter by <span class="button__icon">{% include 'icons/arrow-down.twig' %}</span>
+  </button>
+  <div class="filters__list">
+    <button class="filters__filter button--active" data-name="all">
+      All stories
+    </button>
+    {% for f in filters %}
+      <button class="filters__filter" data-name="{{ f.name }}">
+        {{ f.name }}
+      </button>
+    {% endfor %}
+  </div>
+</nav>

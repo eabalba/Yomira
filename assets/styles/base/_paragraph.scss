@@ -1,0 +1,30 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $PARAGRAPH
+ * -----------------------------------------------------------------------------
+ */
+
+p {
+  margin-bottom: 24px;
+  margin-top: 24px;
+
+  font-size: 15px;
+  letter-spacing: 0.09px;
+  line-height: 24px;
+
+  @include bp-min-width($bp-md) {
+    color: var(--grey600);
+    font-size: 17px;
+    letter-spacing: -0.17px;
+    line-height: 27px;
+  }
+
+  @include bp-min-width($bp-xxxl) {
+    font-size: 22px;
+    line-height: 1.5;
+  }
+}
+
+p:empty {
+  display: none;
+}

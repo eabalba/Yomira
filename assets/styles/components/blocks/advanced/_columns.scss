@@ -1,0 +1,156 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $ADVANCED COLUMNS
+ * -----------------------------------------------------------------------------
+ */
+
+.advanced-columns {
+  margin: 40px auto;
+  padding: 0 36px;
+
+  @include bp-min-width($bp-lg) {
+    margin: 132px auto;
+    padding: 0 70px;
+  }
+
+  @include bp-min-width($bp-xl) {
+    padding: 0;
+    padding-left: 140px;
+  }
+
+  .content {
+    justify-content: flex-start;
+
+    @include bp-min-width($bp-sm) {
+      display: flex;
+    }
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    @include bp-min-width($bp-sm) {
+      max-width: calc(50% - 50px);
+    }
+
+    @include bp-min-width($bp-lg) {
+      max-width: 540px;
+    }
+
+    @include bp-min-width($bp-xl) {
+      max-width: calc(50% - 77px);
+    }
+
+    > *:first-child:not(.column__image),
+    .column__image + * {
+      margin-top: 28px;
+
+      @include bp-min-width($bp-lg) {
+        margin-top: 64px;
+      }
+    }
+  }
+
+  .column--reversed {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+
+    > *:first-child:not(.column__image),
+    .column__image + * {
+      margin-top: 0;
+      margin-bottom: 28px;
+
+      @include bp-min-width($bp-lg) {
+        margin-bottom: 64px;
+      }
+    }
+  }
+
+  .column {
+    @include bp-min-width($bp-sm) {
+      margin-right: 100px;
+    }
+
+    @include bp-min-width($bp-xl) {
+      margin-right: 154px;
+    }
+  }
+
+  .column + .column {
+    margin-top: 48px;
+
+    @include bp-min-width($bp-sm) {
+      margin-right: 0;
+      margin-top: 120px;
+    }
+
+    @include bp-min-width($bp-xl) {
+      margin-right: 0;
+      margin-top: 220px;
+    }
+
+    .column__image {
+      margin-left: auto;
+
+      @include bp-min-width($bp-lg) {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .column__content {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-bottom: 16px;
+    }
+  }
+
+  .column__image {
+    max-width: 222px;
+    width: 100%;
+
+    @include bp-min-width($bp-md) {
+      max-width: 100%;
+    }
+
+    > div {
+      height: 0;
+      padding-top: 100%;
+      position: relative;
+      width: 100%;
+    }
+
+    img,
+    picture,
+    video {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}
+
+.js-enabled {
+  .advanced-columns .column > * {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: 1.4s opacity ease, 1.4s transform ease;
+    will-change: opacity, transform;
+  }
+
+  .advanced-columns .column.inview > * {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

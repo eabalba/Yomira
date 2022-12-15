@@ -1,0 +1,24 @@
+{% if menu %}
+  {% for item in items %}
+    {% if item.children %}
+      <button class="menu__button {{ item.classes|join(' ') }}">
+        {{ item.title }}
+      </button>
+      <nav class="sub-menu">
+        <h2 class="header__title--submenu"
+          id="submenu{{ slugify(item.title) }}">
+          {{ item.title }}
+        </h2>
+        {% include 'partial/menu.twig' with {
+          items: item.children
+        } %}
+      </nav>
+    {% else %}
+      <a class="{{ item.classes|join(' ') }}"
+        target="{{ item.target }}"
+        href="{{ item.link }}">
+        {{ item.title }}
+      </a>
+    {% endif %}
+  {% endfor %}
+{% endif %}

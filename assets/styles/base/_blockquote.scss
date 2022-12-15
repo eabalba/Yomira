@@ -1,0 +1,88 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $BLOCKQUOTE
+ * -----------------------------------------------------------------------------
+ */
+
+blockquote {
+  margin: 0 auto;
+  margin-bottom: 48px;
+  margin-top: 48px;
+  max-width: var(--grid);
+
+  font-family: var(--fontSecondary);
+  font-size: 18px;
+  font-weight: var(--weightLight);
+  letter-spacing: 1.8px;
+  line-height: 23px;
+  quotes: "\201C""\201D""\2018""\2019";
+  text-align: center;
+  text-transform: uppercase;
+
+  p {
+    &::before,
+    &::after {
+      display: inline;
+    }
+  }
+
+  p:first-of-type {
+    &::before {
+      content: open-quote;
+      margin-right: -7px;
+    }
+  }
+
+  p:last-of-type {
+    &::after {
+      content: close-quote;
+      margin-left: -7px;
+    }
+  }
+
+  @include bp-min-width($bp-sm) {
+    font-size: 25px;
+    letter-spacing: 3.75px;
+    line-height: 30px;
+
+    margin-bottom: 72px;
+    margin-top: 72px;
+  }
+
+  cite {
+    display: block;
+    margin-top: 24px;
+
+    font-family: var(--fontPrimary);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: var(--weightLight);
+    letter-spacing: 1.4px;
+    line-height: 20px;
+
+    @include bp-min-width($bp-sm) {
+      font-size: 18px;
+      letter-spacing: 1.8px;
+      line-height: 23px;
+    }
+  }
+
+  p {
+    margin: 0;
+    display: inline;
+    font-size: 18px;
+    font-weight: var(--weightLight);
+    letter-spacing: 1.8px;
+    line-height: 23px;
+
+    @include bp-min-width($bp-sm) {
+      font-size: 25px;
+      font-weight: var(--weightLight);
+      letter-spacing: 3.75px;
+      line-height: 30px;
+    }
+  }
+  p:empty {
+    display: inline !important;
+  }
+}

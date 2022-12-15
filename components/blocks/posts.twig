@@ -1,0 +1,27 @@
+{% set posts = fields.posts %}
+{% set title = fields.title %}
+
+{% set size = 2 %}
+{% if title %}
+  {% set size = 3 %}
+{% endif %}
+
+{% if posts %}
+  <section id="{{ id }}" class="{{ className }}">
+    {% if posts %}
+      <h2 class="h3" id="{{ slugify(title) }}">
+        {{ title }}
+      </h2>
+    {% endif %}
+    <section class="grid">
+      <div class="grid__contents">
+        {% for post in Post(posts) %}
+          {% include 'partial/item.twig' with {
+            post: post,
+            size: size
+          } %}
+        {% endfor %}
+      </div>
+    </section>
+  </section>
+{% endif %}

@@ -1,0 +1,23 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $SECTION
+ * -----------------------------------------------------------------------------
+ */
+
+section {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  > * {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 2560px;
+  }
+
+  @include bp-min-width($bp-lg) {
+    @supports (scroll-snap-type: y mandatory) {
+      // scroll-snap-align: center;
+    }
+  }
+}

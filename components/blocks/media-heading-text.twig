@@ -1,0 +1,28 @@
+ <section class="block media-heading-text_block">
+    <div class="container media-heading-text_container">
+        <div class="media-heading-text_media-column">
+           
+            {% set mediatype = fields.media_type %}
+            {% if mediatype == 'image' %}
+            {% set image = TimberImage(fields.media_image) %}
+                 <div class="media-heading-text_image">
+                    <img src="{{ image.src }}" class="lazy"  alt="{{ image.alt }}" />
+                </div>
+            {% else %}
+                <div class="media-heading-text_video">
+                    <video controls autoplay muted>
+                        <source type="video/mp4" src="{{ fields.media_video }}" >
+                        Your browser is unable to play videos.
+                    </video>
+                </div>
+            {% endif %}
+            
+        </div>
+        <div class="media-heading-text_heading-column section-title">
+            {{ fields.media_heading }}
+        </div>
+        <div class="media-heading-text_content-column">
+            {{ fields.media_text_main_content }}
+        </div>
+    </div> 
+</section>

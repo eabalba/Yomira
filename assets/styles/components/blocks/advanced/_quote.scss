@@ -1,0 +1,40 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $ADVANCED QUOTE
+ * -----------------------------------------------------------------------------
+ */
+
+.advanced-quote {
+  margin: 64px auto 48px;
+  max-width: 726px;
+  padding-left: 36px;
+  padding-right: 36px;
+
+  @include bp-min-width($bp-md) {
+    margin: 64px auto;
+  }
+
+  @include bp-min-width($bp-xl) {
+    margin: 100px auto;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  blockquote {
+    margin: 0 auto;
+  }
+}
+
+.js-enabled {
+  .advanced-quote > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 1.4s opacity ease, 1.4s transform ease;
+    will-change: opacity, transform;
+  }
+
+  .advanced-quote.inview > * {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

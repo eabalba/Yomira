@@ -1,0 +1,31 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $RELATED
+ * -----------------------------------------------------------------------------
+ */
+
+.related {
+  > h2 {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: var(--grid);
+    width: 100%;
+
+    text-align: center;
+  }
+
+  @include bp-min-width($bp-lg) {
+    margin-bottom: 140px;
+    margin-top: 140px;
+  }
+
+  .grid__contents {
+    @include bp-min-width($bp-lg) {
+      margin-bottom: 48px;
+    }
+
+    @include bp-min-width($bp-xl) {
+      margin-top: 64px;
+    }
+  }
+}

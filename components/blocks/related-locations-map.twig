@@ -1,0 +1,51 @@
+<!--============ DESTINATION BLOCK =================-->
+<section id="" class="block location-destination-block background-color background-color-grey">
+    <div class="container location-destination-container">
+        <div class="destination__map-column">
+            <div class="section__title">
+                {{ fields.section_heading }}
+            </div>
+             {% set image = TimberImage(fields.map_image) %}
+            <div class="map">
+                <img src="{{ image.src }}" class="lazy"  alt="{{ image.alt }}" />
+                {% set locations = fields.locations %}
+                {% if locations %}
+                    {% for location in locations %}
+                        {% set pin_label = location.pin_label %}
+                        {% set pin_label_trim = location.pin_label|replace({' ': ''}) %}
+                        <div id="{{ pin_label_trim }}Content"  class="location-map-pin pin {% if location.pin_x_position > 50 %} reverse {% endif %} {% if loop.first %}active{% endif %}" 
+                        style="left:{{ location.pin_x_position }}%; bottom:{{ location.pin_y_position }}%">
+                            <span class="pin_label">{{ pin_label }}</span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="destination__media-text-column">
+            {% set locations = fields.locations %}
+            {% if locations %}
+                {% for location in locations %}
+                {% set pin_label_trim = location.pin_label|replace({' ': ''}) %}
+                    <div class="destination__tab {{ pin_label_trim }}Content {% if loop.first %}active{% endif %}">
+                        <div class="destination__media">
+                            {% set image = TimberImage(location.image) %}
+                            {% if  image  %}
+                                <img src="{{ image.src }}" class="lazy"  alt="{{ image.alt }}" />
+                            {% endif %}
+                        </div>
+
+                        <div class="destination__info">
+                             {{ location.text_content }}
+                            <div>
+                                {% set cta = location.cta %}
+                                {% if cta %}
+                                    <a class="button" href="{{ cta.url }}">{{ cta.title }}</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                  {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</section>

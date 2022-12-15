@@ -1,0 +1,15 @@
+{% set citation = fields.citation %}
+{% set quotation = fields.quotation %}
+
+{% if quotation %}
+  <section id="{{ id }}" class="{{ className }}">
+    <blockquote>
+      <p>
+        {{ quotation }}
+      </p>
+      {% if citation %}
+        <cite>{{ citation }}</cite>
+      {% endif %}
+    </blockquote>
+  </section>
+{% endif %}

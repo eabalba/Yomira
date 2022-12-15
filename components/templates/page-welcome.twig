@@ -1,0 +1,33 @@
+{% extends 'base.twig' %}
+{% block header %}
+
+{% endblock %}
+{% block content %}
+  <div class="page--holding">
+    <div class="page__content">
+      <span class="page__logo">{% include 'vectors/logo.twig' %}</span>
+      {{ post.content }}
+    </div>
+    <div class="page__media">
+      <div class="page__media__content">
+        <span class="page__logo">{% include 'vectors/logo.twig' %}</span>
+        <h2>
+          Your time, your ocean, our expertise
+        </h2>
+      </div>
+      <picture>
+        <source srcset="{{ post.thumbnail.src|resize(1920, 2560) }}"
+          media="(min-width: 2560px)" />
+        <source srcset="{{ post.thumbnail.src|resize(960) }}"
+          media="(min-width: 1024px)" />
+        <source srcset="{{ post.thumbnail.src|resize(700, 1200) }}"
+          media="(min-width: 450px)" />
+        <img src="{{ post.thumbnail.src|resize(450, 800) }}"
+          alt="{{ post.thumbnail.alt }}" />
+      </picture>
+    </div>
+  </div>
+{% endblock %}
+{% block footer %}
+
+{% endblock %}

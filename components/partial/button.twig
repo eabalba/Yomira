@@ -1,0 +1,46 @@
+{% set classList = 'button button--complex ' ~ class %}
+
+{% if el != 'button' %}
+  <a class="{{ classList }}"
+    href="{{ href }}"
+    target="{{ target }}"
+    aria-label="{{ ariaLabel }}">
+    {{ title }}
+    <svg class="button__border"
+      viewBox="0 0 260 61"
+      style="overflow:visible;enable-background:new 0 0 260 61;"
+      xml:space="preserve"
+      xmlns="http://www.w3.org/2000/svg">
+      {% include 'partial/button-path.twig' %}
+      {% include 'partial/button-path.twig' with {
+        animated: true
+      } %}
+    </svg>
+  </a>
+{% endif %}
+
+{% set attrs = '' %}
+
+{% if el == 'button' %}
+  {% if disabled %}
+    {% set attrs = attrs ~ "disabled='true'" %}
+  {% endif %}
+
+  {% if type %}
+    {% set attrs = attrs ~ "type='" ~ type ~ "'" %}
+  {% endif %}
+
+  <button class="{{ classList }}" {{ attrs }}>
+    {{ title }}
+    <svg class="button__border"
+      viewBox="0 0 260 61"
+      style="overflow:visible;enable-background:new 0 0 260 61;"
+      xml:space="preserve"
+      xmlns="http://www.w3.org/2000/svg">
+      {% include 'partial/button-path.twig' %}
+      {% include 'partial/button-path.twig' with {
+        animated: true
+      } %}
+    </svg>
+  </button>
+{% endif %}

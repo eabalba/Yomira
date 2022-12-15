@@ -1,0 +1,76 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $TABLE
+ * -----------------------------------------------------------------------------
+ */
+
+table {
+  border-collapse: collapse;
+  margin: 24px 0;
+  overflow-x: auto;
+  width: 100%;
+
+  @include bp-max-width($bp-md - 1px) {
+    display: block;
+    overflow-x: scroll;
+    padding-bottom: 2.4rem;
+
+    &::-webkit-scrollbar {
+      background-color: rgba(var(--black), 0.2);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 0;
+      background-color: var(--black);
+      box-shadow: 0 0 1px var(--black);
+    }
+  }
+
+  font-size: 1.5rem;
+  text-align: left;
+
+  caption {
+    margin-top: 16px;
+    padding: 0;
+
+    color: var(--black);
+    font-size: 1.5rem;
+  }
+
+  td,
+  th {
+    padding: 6px 16px;
+  }
+
+  td {
+    padding: 12px 16px;
+  }
+
+  td {
+    > *:first-child {
+      margin-top: 0;
+    }
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  tr {
+    vertical-align: top;
+    background-color: var(--white);
+    border-top: 1px solid var(--grey100);
+    transition: background-color 0.2s ease;
+    will-change: background-color;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: var(--whiteOff);
+    }
+
+    > *:first-child {
+      padding-left: 0;
+    }
+  }
+}

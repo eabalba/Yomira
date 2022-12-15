@@ -1,0 +1,19 @@
+{% set alt = image.alt %}
+{% set largest = image.src|resize(2560, 1920) %}
+{% set large = image.src|resize(1600, 1080) %}
+{% set medium = image.src|resize(1200) %}
+{% set smallest = image.src|resize(700, 1200) %}
+{% set small = image.src|resize(500, 700) %}
+{% set tiny = image.src|resize(10, 10) %}
+
+{% set classList = 'lazy' %}
+
+<picture>
+  <source data-srcset="{{ largest }}" media="(min-width: 1600px)" />
+  <source data-srcset="{{ large }}" media="(min-width: 960px)" />
+  <source data-srcset="{{ medium }}" media="(min-width: 700px)" />
+  <source data-srcset="{{ smallest }}" media="(min-width: 450px)" />
+  <source data-srcset="{{ small }}" media="(min-width: 1px)" />
+  <img class="{{ classList }}" src="{{ tiny }}" data-src="{{ largest }}" alt="{{ alt }}" />
+</picture>
+

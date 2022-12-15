@@ -1,0 +1,98 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+  {{  overview.content}}
+   
+    {% for destination in locations %}
+        {% set title = destination.title %}
+        {% set link = destination.link %}
+        {% set excerpt = destination.brief_description %}
+        <section  class="block charter-destination-block">
+            <div class="container charter-destination-container ">
+                <img class="charter-destination-image" src="{{ destination.thumbnail.src }}" alt="{{ destination.thumbnail.alt }}"/>
+
+                <div class="charter-destination-textbox">
+                    <div class="section__title">
+                        <h2>{{ title }}</h2>
+                    </div>
+                    <div class="charter-destination-textbox-blurb">
+                        <p>{{ excerpt }}</p>
+                    </div>
+                    <div class="buttons">
+                        {% if destination.children('location') %}<button class="button charterToggle" id="charterToggle-{{ title }}" onclick="showCountries('{{ title }}')"><span class="state">Show</span> countries <i class="arrow down"></i></button>{% endif %}
+                        {% if destination.link_to == 'destination' %}
+                            <a class="button" href="{{ link }}">Discover more <i class="arrow right"></i></a>
+                        {% endif %}
+                        {% if destination.link_to == 'contact' %}
+                            <a class="button" href="{{ site.link }}/contact">{{destination.contact_link_text}} <i class="arrow right"></i></a>
+                        {% endif %}
+                    </div>
+                </div>  
+            </div>
+            {% if destination.children('location') %}
+                <div class="charter-country-destination-container" id="country-{{ title }}">
+                    <div class="charter-country-slider container ">
+                        {% for child in destination.children('location') %}
+                             {% if child.hide_location_from_destinations_page == 0 %}
+
+                                <div class="charter-country">
+                                {% if child.link_to == 'contact' %}
+                                    <a href="{{ site.link }}/contact">
+                                {% else %}
+                                    <a href="{{ child.link }}">
+                                {% endif %}
+                                        <img  src="{{ child.thumbnail.src }}" alt="{{ child.thumbnail.alt }}">
+                                        <h3 class="charter-country-name">{{ child.title }}</h3>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            {% endif %}
+        </section>
+    {% endfor %}
+
+ <section id="suggestion-block" class="block  suggestion-block">
+    <div class="container suggestion-container">
+        <div class="section-title">
+             {% if  overview.yachts_heading %} {{ overview.yachts_heading }}  {% else %} <h2> Choose a Superyacht </h2>{% endif %}
+        </div>
+        <div class="chartered-yachts-tabs">
+            <h3 data-season="summer" class="chartered-tab tab">Summer</h3>
+            <h3 data-season="winter" class="chartered-tab tab">Winter</h3>
+            <h3 data-season="all" class="chartered-tab tab current-chartered-tab">All</h3>
+        </div>
+        <div class="suggestion-columns suggestions-slider">
+            {% for yacht in Post(overview.related_yachts) %}
+                {% set title = yacht.title %}
+                {% set link = yacht.link %}
+                {% set excerpt = yacht.brief_description %}
+                {% set summer_location = yacht.summer_location %}
+                {% set winter_location = yacht.winter_location %}
+            
+                <div class="suggestion-column 
+                    {% if summer_location %} summer {% endif %} 
+                    {% if winter_location %} winter {% endif %} ">
+                    <div class="suggestion-column-top">
+                        <img src="{{ yacht.thumbnail.src }}" alt="{{ yacht.thumbnail.alt }}"/>
+                        <p class="suggestion-title"> {{ title }}</p>
+                        {% if excerpt %}
+                        <p>{{ excerpt }}</p>
+                        {% else %}
+                        {{ content }}
+                        {% endif %}
+                    </div>
+                    <div><a class="button" href="{{ link }}">View</a></div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+      
+
+
+{% endblock %}
+
+

@@ -1,0 +1,62 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $GRADIENT
+ * -----------------------------------------------------------------------------
+ */
+
+// If the gradient is too dark at the top, take the 20% value instead
+
+.gradient--one {
+  background: linear-gradient(
+    180deg,
+    rgba(#56346e, 1) 0%,
+    rgba(#56346e, 1) 20%,
+    rgba(#639e8d, 1) 60%,
+    rgba(#3e94d1, 1) 100%
+  );
+  color: var(--white);
+}
+
+.gradient--two {
+  background: linear-gradient(
+    180deg,
+    rgba(#213e6b, 1) 0%,
+    rgba(#213e6b, 1) 20%,
+    rgba(#75a0b9, 1) 60%,
+    rgba(#c6dce2, 1) 100%
+  );
+  color: var(--white);
+}
+
+.gradient--three {
+  background: linear-gradient(
+    180deg,
+    rgba(#c02b1a, 1) 0%,
+    rgba(#c02b1a, 1) 20%,
+    rgba(#c85e83, 1) 60%,
+    rgba(#ffb730, 1) 100%
+  );
+  color: var(--white);
+}
+
+.gradient--four {
+  background: linear-gradient(
+    180deg,
+    rgba(#20375e, 1) 0%,
+    rgba(#20375e, 1) 20%,
+    rgba(#744373, 1) 60%,
+    rgba(#f78d41, 1) 100%
+  );
+  color: var(--white);
+}
+
+.gradient--five {
+  background: linear-gradient(
+    180deg,
+    rgba(#006fa5, 1) 0%,
+    rgba(#0487bf, 1) 20%,
+    rgba(#88bade, 1) 60%,
+    rgba(#c4dbe2, 1) 100%
+  );
+  color: var(--white);
+}

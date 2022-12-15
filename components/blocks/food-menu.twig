@@ -1,0 +1,42 @@
+<!--============ MENU BLOCK =================-->
+<section id="menu-block" class="block menu-block background-color background-color-grey">
+    <div class="container menu-container">
+        <div class="food-menu-column">
+           {{ fields.menus_heading }}
+           {% set tabs = fields.menus_tabs %}
+             {% if tabs %}
+                <div class="menu-tabs tabs">
+                    {% for tab in tabs %}
+                        {% set tab_heading = tab.tab_heading %}
+                        <p id="food-tab" class="food-tab {% if loop.first %}active-tab{% endif %}" onclick="foodTab(event, '{{ tab_heading }}', '{{ tab_heading }}Focus')">{{ tab_heading }}</p>
+                    {% endfor %}
+
+                </div>
+                
+                <div class="food-menu-selection">
+                    {% for tab in tabs %}
+                    {% set tab_heading = tab.tab_heading %}
+                        <div id="{{ tab_heading }}" class="food-tab-content tab-content">
+                        {{ tab.main_content_left }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="food-menu-media-column">
+                {% for tab in tabs %}
+                    {% set tab_heading = tab.tab_heading %}
+                    <div id="{{ tab_heading }}Focus" class="food-menu-on-focus">
+                        {% set image = TimberImage(tab.image) %}
+                        {% if  image  %}
+                            <div class="food-menu-image align-right">
+                                <img src="{{ image.src }}" class="lazy"  alt="{{ image.alt }}" />
+                            </div>
+                        {% endif %}
+
+                        {{ tab.additional_content_right }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</section>

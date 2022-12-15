@@ -1,0 +1,31 @@
+{% if light %}
+	{% set body_class = body_class ~ " body--light" %}
+{% endif %}
+
+{% if cookies_determined == null %}
+	{% set body_class = body_class ~ " body--cookies" %}
+{% endif %}
+
+{% block html_head_container %}
+	{% include 'html-header.twig' %}
+	{% block head %}{% endblock %}
+	</head>
+{% endblock %}
+	<body class="{{body_class}} env--{{env}} page--{{post.slug}}" data-template="base.twig">
+		{% include 'partial/cookies.twig' %}
+		{% block header %}
+			{% include 'header.twig' %}
+		{% endblock %}
+		<main id="content" role="main" class="content-wrapper">
+			{% block content %}
+				Sorry, no content
+			{% endblock %}
+		</main>
+		{% block footer %}
+			{% include 'footer.twig' %}
+		{% endblock %}
+    {% include 'partial/cursor.twig' %}
+		{{ function('wp_footer') }}
+		{% include 'partial/tracking.twig' %}
+	</body>
+</html>

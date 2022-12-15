@@ -1,0 +1,245 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $COLUMNS
+ * -----------------------------------------------------------------------------
+ */
+
+.block--columns {
+  margin-bottom: 56px;
+  margin-top: 56px;
+  overflow: hidden;
+
+  text-align: center;
+
+  @include bp-min-width($bp-sm) {
+    margin-bottom: 96px;
+    margin-top: 96px;
+  }
+
+  @include bp-min-width($bp-md) {
+    margin-bottom: 148px;
+    margin-top: 148px;
+
+    text-align: left;
+  }
+
+  @include bp-min-width($bp-lg) {
+    margin-bottom: 180px;
+    margin-top: 180px;
+  }
+}
+
+.columns__contents {
+  flex-wrap: wrap;
+
+  @include bp-min-width($bp-md) {
+    display: flex;
+  }
+}
+
+.columns__content {
+  padding: 0 15px;
+
+  @include bp-min-width($bp-lg) {
+    padding: 0;
+    padding-right: 15px;
+  }
+
+  @include bp-min-width($bp-md) {
+    display: flex;
+    order: 1;
+    width: 66.666%;
+  }
+
+  @include bp-min-width($bp-lg) {
+    flex-wrap: wrap;
+  }
+
+  > * {
+    @include bp-min-width($bp-md) {
+      padding-right: 40px;
+      width: 100%;
+    }
+
+    @include bp-min-width($bp-lg) {
+      padding-right: 64px;
+      width: 50%;
+    }
+
+    @include bp-min-width($bp-xl) {
+      padding-right: 80px;
+    }
+
+    @include bp-min-width($bp-xxl) {
+      padding-right: 96px;
+    }
+
+    > *:first-child {
+      @include bp-min-width($bp-md) {
+        margin-top: 0;
+      }
+    }
+
+    > *:last-child {
+      @include bp-min-width($bp-md) {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.columns__media__inner {
+  @include bp-min-width($bp-md) {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: calc(100% + 60px);
+  }
+
+  @include bp-min-width($bp-xl) {
+    width: calc(100% + 50px);
+  }
+
+  @include bp-min-width($bp-xxl) {
+    width: calc(100% + 160px);
+  }
+}
+
+.columns__media {
+  display: block;
+  height: 0;
+  margin: 56px auto;
+  padding-top: 130%;
+  position: relative;
+  width: 100%;
+
+  @include bp-min-width($bp-md) {
+    height: auto;
+    margin: 0;
+    max-height: 600px;
+    padding-top: 0;
+    order: 2;
+    width: 33.333%;
+  }
+
+  @include bp-min-width($bp-lg) {
+    max-height: 100%;
+  }
+
+  .lazy-group,
+  img,
+  picture,
+  video {
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    @include bp-min-width($bp-lg) {
+      width: calc(100% + 60px);
+    }
+  }
+}
+
+.columns__title {
+  margin-bottom: 48px;
+  padding: 0 20px;
+
+  order: 0;
+
+  @include bp-min-width($bp-md) {
+    width: 100%;
+  }
+
+  @include bp-min-width($bp-lg) {
+    padding: 0;
+  }
+
+  span {
+    display: block;
+    width: 100%;
+
+    @include bp-min-width($bp-md) {
+      max-width: 66.666%;
+      padding-right: 40px;
+    }
+
+    @include bp-min-width($bp-lg) {
+      max-width: 460px;
+    }
+  }
+}
+
+.columns__title--desktop {
+  display: none;
+
+  @include bp-min-width($bp-lg) {
+    display: block;
+  }
+}
+
+.columns__title--mobile {
+  display: block;
+
+  @include bp-min-width($bp-lg) {
+    display: none;
+  }
+}
+
+.js-enabled {
+  .columns__media,
+  .columns__title {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 1s opacity ease, 1s transform ease;
+    will-change: opacity transform;
+  }
+
+  .columns__media {
+    @include bp-min-width($bp-md) {
+      transition-delay: 1.5s;
+    }
+  }
+
+  .columns__content > * {
+    opacity: 0;
+    transform: translateY(0px);
+    transition: 1s opacity ease, 1s transform ease;
+    will-change: opacity transform;
+
+    @include bp-min-width($bp-md) {
+      transform: translateX(40px);
+    }
+
+    @include bp-min-width($bp-md) {
+      @for $i from 1 through 3 {
+        &:nth-child(#{$i}) {
+          transition-delay: #{($i - 1) * 0.5}s;
+        }
+      }
+    }
+  }
+
+  .block--columns.inview {
+    .columns__media,
+    .columns__title {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .columns__content > * {
+      opacity: 1;
+      transform: translateY(0);
+
+      @include bp-min-width($bp-md) {
+        transform: translateX(0px);
+      }
+    }
+  }
+}

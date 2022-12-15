@@ -1,0 +1,15 @@
+{% set image = TimberImage(fields.section_image) %}
+{% set timeline = fields.timeline_text %}
+{% set text = fields.text %}
+
+{% if text %}
+  <section id="{{ id }}" class="{{ className }}">
+    <h2 class="h2" id="{{ slugify(text) }}"
+      data-image="{{ image.src|resize(64, 64) }}"
+      data-timeline="{{ timeline }}">
+      {{ text }}
+    </h2>
+    <!--<h3>YOUR TIME, YOUR OCEAN, OUR EXPERTISE. EXPERIENCES WITH INDIVIDUAL TOUCH AND GLOBAL REACH</h3>-->
+    <!--<h2>YOUR TIME, YOUR OCEAN, OUR EXPERTISE. EXPERIENCES WITH INDIVIDUAL TOUCH AND GLOBAL REACH</h2>-->
+  </section>
+{% endif %}

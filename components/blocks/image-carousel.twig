@@ -1,0 +1,18 @@
+{% set carousel = fields.image_carousel %}
+
+{% if carousel %}
+ <section id="" class="block image-carousel-block">
+    <div class="image-carousel-slider">
+    {% for carousel_item in carousel %}
+      {% set image = TimberImage(carousel_item.image_carousel_image) %}
+        <div class="image-carousel-image">
+          <img alt="{{ image.alt }}" src="{{ image.src('full') }}" />
+           {% if image.caption %}
+           <figcaption>{{ image.caption }}</figcaption>
+           {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+

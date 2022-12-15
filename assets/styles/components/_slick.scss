@@ -1,0 +1,114 @@
+/**
+ * -----------------------------------------------------------------------------
+ * $SLICK
+ * -----------------------------------------------------------------------------
+ */
+
+body {
+  .slick-dots {
+    bottom: auto;
+    line-height: 1;
+    margin-top: 0;
+
+    li {
+      height: auto;
+      margin: 0;
+      padding: 0;
+      width: auto;
+
+      cursor: none;
+
+      button {
+        min-width: 0px;
+        height: 39px;
+        padding: 0;
+        width: 27px;
+
+        @include active-states() {
+          &::before {
+            opacity: 1;
+          }
+        }
+
+        &::before {
+          min-width: 0px;
+          height: 2px;
+          padding: 0;
+          top: 30px;
+          width: 27px;
+
+          background-color: var(--black);
+          opacity: 0.25;
+          transition: 1s opacity ease;
+          will-change: opacity;
+        }
+      }
+    }
+
+    li + li {
+      margin-left: 6px;
+    }
+
+    li.slick-active {
+      button {
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .slick-arrow {
+    border-radius: 50%;
+    height: 56px;
+    min-width: 0px;
+    width: 56px;
+    z-index: 2;
+
+    border: 2px solid;
+    border-color: rgba($white, 0.35);
+    transition: 0.2s border-color ease;
+    will-change: border-color;
+
+    @include bp-min-width($bp-lg) {
+      height: 98px;
+      width: 98px;
+
+      border-width: 3px;
+    }
+
+    &:hover {
+      border-color: var(--white);
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7.477' height='13.701' viewBox='0 0 7.477 13.701'%3E%3Cpath id='Path_14' data-name='Path 14' d='M9.485,5.444H8.9l-4-4.9L.881,5.444H0L4.447,0h.59Z' transform='translate(1.033 11.593) rotate(-90)' fill='%23fff' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E%0A");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 9px;
+      opacity: 1;
+
+      @include bp-min-width($bp-lg) {
+        background-size: 12px;
+      }
+    }
+  }
+
+  .slick-prev {
+    left: 10px;
+  }
+
+  .slick-next {
+    right: 10px;
+
+    transform: translate(0, -50%) rotate(180deg);
+  }
+}

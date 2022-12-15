@@ -1,0 +1,40 @@
+
+<!--============ KEY FEATURES BLOCK =================-->
+<section id="features-block" class="block features-block background-color background-color-grey">
+    <div class="container key-features-container">
+        <div class="key-features-column">
+            <div class="section-title"> {{ fields.key_features_heading }}</div>
+            {{ fields.key_features }}
+        </div>
+        {% set tabs = fields.additional_tabs %}
+        {% if tabs %}
+            <div class="specification-column">
+                <div class="specification-tabs tabs">
+                
+                    {% for tab in tabs %}
+                        {% set tab_heading = tab.tab_heading %}
+                        <div class="tab-wrap" data-tabheading="{{ tab_heading }}">
+                            <h3 id="tab"  class="tab  {% if loop.first %}current-tab{% endif %}" onclick="openTab(event, '{{ tab_heading }}')">{{ tab_heading }}</h3>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% for tab in tabs %}
+                    {% set tab_heading = tab.tab_heading %}
+                    <div id="{{ tab_heading }}" class="specification-tab-content tab-content">
+                        {{ tab.tab_content }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+       <!-- {% if fields.key_features_disclaimer_control %}
+            <div class="disclaimer">
+                {% if fields.key_features_disclaimer %}
+                    {{ fields.key_features_disclaimer }}
+                {% else %}
+                    <p><strong>Please note:</strong> Details are offered in good faith but we cannot guarantee the accuracy of the information provided or warrant the condition of the vessel and amenities, or the composition of crew.  This vessel is offered subject to price change or withdrawal without notice and is not offered for charter to US clients in US waters.
+                    </p>
+                {% endif %}
+           </div>
+        {% endif %}-->
+    </div>
+</section>

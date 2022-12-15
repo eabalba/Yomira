@@ -1,0 +1,139 @@
+/**
+ * -----------------------------------------------------------------------------
+ * VARS
+ * -----------------------------------------------------------------------------
+ */
+
+// Layout
+$bp-xs: 576px;
+$bp-sm: 768px;
+$bp-md: 992px;
+$bp-lg: 1200px;
+$bp-xl: 1440px;
+$bp-xxl: 1800px;
+$bp-xxxl: 2400px;
+
+$grid-sm: calc(100% - 30px);
+$grid-md: calc(100% - 45px);
+$grid-lg: calc(100% - 60px);
+$grid-xl: calc(100% - 60px);
+$grid-xxl: 1640px;
+$grid-xxxl: 2300px;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: $bp-sm,
+  md: $bp-md,
+  lg: $bp-lg,
+  xl: $bp-xl,
+  xxl: $bp-xxl,
+  xxxl: $bp-xxxl,
+);
+
+$container-max-widths: (
+  sm: $grid-sm,
+  md: $grid-md,
+  lg: $grid-lg,
+  xl: $grid-xl,
+  xxl: $grid-xxl,
+  xxxl: $grid-xxxl,
+);
+
+$mediaScale: 1.05;
+$borderRadiusInput: 3px;
+/* SPACING */
+$blockMarginXS: 48px;
+$blockMarginSM: 64px;
+$blockMarginMD: 72px;
+$blockMarginLG: 80px;
+$blockMarginXL: 92px;
+$gridMax: 1640px;
+$spacingTiny: 4px;
+$spacingSmall: 8px;
+$spacingDefault: 16px;
+$spacingLarge: 32px;
+$spacingHuge: 64px;
+/* COLOURS */
+$white: #ffffff;
+$offWhite: #fbfbfb;
+$grey: #a6a6a6;
+$grey100: #d9d9d9;
+$grey200: #bfbfbf;
+$grey300: #a6a6a6;
+$grey400: #8c8c8c;
+$grey500: #707070;
+$grey600: #575757;
+$grey700: #404040;
+$grey800: #262626;
+$grey900: #0d0d0d;
+$black: #222222;
+$blackAbsolute: #000;
+/* Brand Colours */
+$blue: #3498db;
+$blueDark: #14203e;
+$green: #619e8e;
+$primary: $blueDark;
+$bs: 0px 3px 15px rgba(0, 0, 0, 0.09);
+$fontPrimary: '"Work Sans", "Nunito Sans", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+$fontSecondary: '"brewery-std", "Nunito Sans", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+$weightBold: 700;
+$weightSemi: 600;
+$weightMedium: 500;
+$weightDefault: 400;
+$weightLight: 300;
+
+$vars: (
+  "bp-xs": $bp-xs,
+  "bp-sm": $bp-sm,
+  "bp-md": $bp-md,
+  "bp-lg": $bp-lg,
+  "bp-xl": $bp-xl,
+  "bp-xxl": $bp-xxl,
+  "bp-xxxl": $bp-xxxl,
+  "grid": $grid-xxl,
+  "mediaScale": $mediaScale,
+  "borderRadiusInput": $borderRadiusInput,
+  "blockMarginXS": $blockMarginXS,
+  "blockMarginSM": $blockMarginSM,
+  "blockMarginMD": $blockMarginMD,
+  "blockMarginLG": $blockMarginLG,
+  "blockMarginXL": $blockMarginXL,
+  "gridMax": $gridMax,
+  "spacingTiny": $spacingTiny,
+  "spacingSmall": $spacingSmall,
+  "spacingDefault": $spacingDefault,
+  "spacingLarge": $spacingLarge,
+  "spacingHuge": $spacingHuge,
+  "white": $white,
+  "offWhite": $offWhite,
+  "grey": $grey,
+  "grey100": $grey100,
+  "grey200": $grey200,
+  "grey300": $grey300,
+  "grey400": $grey400,
+  "grey500": $grey500,
+  "grey600": $grey600,
+  "grey700": $grey700,
+  "grey800": $grey800,
+  "grey900": $grey900,
+  "black": $black,
+  "blackAbsolute": $blackAbsolute,
+  "blue": $blue,
+  "blueDark": $blueDark,
+  "green": $green,
+  "primary": $primary,
+  "bs": $bs,
+  "fontPrimary": $fontPrimary,
+  "fontSecondary": $fontSecondary,
+  "weightBold": $weightBold,
+  "weightSemi": $weightSemi,
+  "weightMedium": $weightMedium,
+  "weightDefault": $weightDefault,
+  "weightLight": $weightLight,
+);
+
+:root {
+  @each $name, $value in $vars {
+    --#{$name}: #{$value};
+  }
+}
